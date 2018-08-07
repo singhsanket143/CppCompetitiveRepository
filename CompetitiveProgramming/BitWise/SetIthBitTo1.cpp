@@ -9,6 +9,5 @@ int main(int argc, char* argv[])
     cin >> n >> i;
     setithBit(n, i);
     cout<<n<<endl;
-
     return 0;
 }
