@@ -6,6 +6,9 @@ char *myStrtok(char str[], char delim) {
     if (str != NULL) {
         input = str;
     }
+    if(input==NULL){
+        return NULL;
+    }
     char *output = new char[strlen(input)+1];
     int i;
     for(i=0;input[i]!='\0';i++) {
@@ -23,7 +26,14 @@ char *myStrtok(char str[], char delim) {
 }
 int main(int argc, char* argv[])
 {
+    char str[] = "Hy, all welcome to coding!!";
 
+    char *ptr;
+    ptr = myStrtok(str, ' ');
+    while(ptr!=NULL) {
+        cout<<ptr<<endl;
+        ptr = myStrtok(NULL, ' ');
+    }
 
     return 0;
 }
