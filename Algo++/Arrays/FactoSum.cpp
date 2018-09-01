@@ -3,6 +3,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    int ary[1000000];
     int n;
     cin>>n;
     int arr[n];
