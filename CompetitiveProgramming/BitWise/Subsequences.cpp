@@ -1,5 +1,5 @@
 #include "iostream"
-#include "string"
+#include<bits/stdc++.h>
 using namespace std;
 
 void filterString(std::string str, int n) {
