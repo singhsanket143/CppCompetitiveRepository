@@ -33,7 +33,7 @@ public class GraphOnArray {
 	                    int m = a.removeFirst();
 	                    if (gcd(num.get(i), m) == 1)
 	                    	num.add(m);
-	                    else list.add(m);
+	                    else list.add(m); // 2 4 5 9 10
 	                }
 	                a = list;
 	                list = new LinkedList<>();
