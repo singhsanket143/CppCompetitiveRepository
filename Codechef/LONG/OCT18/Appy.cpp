@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
 		cout<<"0";
 		return 0;
 	}
-	priority_queue< pair<lli, pair<ll, ll> > > qu;
+	
 	pair<lli, pair<ll, ll> > arr[n];
 	for(int i=0;i<n;i++) {
 		arr[i] = make_pair(a[i]*b[i], make_pair(a[i], b[i]));
