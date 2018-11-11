@@ -3,7 +3,7 @@
 #define ll long long int
 using namespace std;
 ll arr[1000005];
-ll dp[][]
+ll dp[][];
 int main(int argc, char* argv[])
 {
     int n, m;
