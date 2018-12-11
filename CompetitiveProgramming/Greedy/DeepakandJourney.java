@@ -23,4 +23,4 @@ public class DeepakandJourney {
 			System.out.println(ans);
 		}
 	}
-}
+}		

@@ -111,6 +111,8 @@ public:
      	}
      }
 
+     
+
      void dfs(int src) {
      	map<int, bool> visited;
      	dfsHelper(src, visited);
@@ -148,7 +150,8 @@ int main(int argc, char const *argv[])
 	g.addEdge(1, 2);
 	g.addEdge(0, 2);
 	
-	g.printAdjList();
+	// g.printAdjList();
 	g.dfs(0);
+     // g.bfs(0);
 	return 0;
 }
