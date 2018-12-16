@@ -4,7 +4,7 @@ using namespace std;
 
 void primeSieve(int n, int sieve[]) {
     sieve[0] = sieve[1] = 0;
-    sieve[2] = 1;
+    sieve[2] = 1; 
 
     for(int i = 3; i<=n; i+=2) {
         sieve[i] = 1;
