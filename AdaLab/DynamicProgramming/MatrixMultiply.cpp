@@ -1,3 +1,6 @@
+/*
+By Sanket Singh
+*/
 #include <iostream>
 using namespace std;
 
