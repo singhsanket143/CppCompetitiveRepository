@@ -569,6 +569,61 @@ int sumAtLevelK(node *root, int k) {
 	return leftAns+rightAns;
 }
 
+// Nodes at distance K
+void printKDistanceNodedown(node* node, int k, vector<int> arr) {
+		if (node == NULL || k < 0) {
+			return;
+		}
+		if (k == 0) {
+			// System.out.println(node.data);
+			arr.push_back(node->data);
+			return;
+		}
+		printKDistanceNodedown(node->left, k - 1, arr);
+		printKDistanceNodedown(node->right, k - 1, arr);
+
+}
+
+int printkNodeDistance(node* node, int target, int k, vector<int> arr) {
+		if (node == NULL) {
+			return -1;
+		}
+		if (node->data == target) {
+			printKDistanceNodedown(node, k, arr);
+			return 0;
+		}
+		int dl = printkNodeDistance(node->left, target, k, arr);
+		if (dl != -1) {
+			if (dl + 1 == k) {
+				// System.out.println(node.data);
+				arr.push_back(node->data);
+			} else {
+				printKDistanceNodedown(node->right, k - dl - 2, arr);
+			}
+			return 1 + dl;
+		}
+		int dr = printkNodeDistance(node->right, target, k, arr);
+		if (dr != -1) {
+			if (dr + 1 == k) {
+				// System.out.println(node.data);
+				arr.push_back(node->data);
+
+			} else {
+				printKDistanceNodedown(node->left, k - dr - 2, arr);
+			}
+			return 1 + dr;
+		}
+		return -1;
+}
+
+vector<int> printkNodeDistance(int target, int k, node* root) {
+		vector<int> arr;
+		printkNodeDistance(root, target, k, arr);
+		sort(arr.begin(), arr.end());
+		return arr;
+}
+//
+
 int main(){
 	node*root = buildLevelOrder();//buildRec();
 	// printPre(root);
@@ -576,12 +631,14 @@ int main(){
 	// cout<<count(root)<<endl;
 	// cout<<height(root)<<endl;
 	//printAtLevelK(root,2);
-
+	 pair<int, bool> p = isBalanced(root);
+	 if(p.second) cout << "true";
+	 else cout << "false";
 	//replaceChildSum(root);
 	//printPre(root);
 	// printLevelOrder(root);
 	// levelOrderZigZag(root);
-	topView(root);
+	// topView(root);
 
 
 	return 0;
