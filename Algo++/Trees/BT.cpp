@@ -2,6 +2,7 @@
 #include<queue>
 #include<cmath>
 #include <stack>
+#include <map>
 using namespace std;
 //------------Node Class
 class node{
@@ -458,6 +459,65 @@ void leftView(node *root) {
 	leftViewHelper(root, 1, max_level);
 }
 
+void bottomView1(node *root, int level, int dist, map<int, pair<int, int> > &mp) {
+	if(root == NULL) {
+		return;
+	}
+	if(mp.find(dist) == mp.end() or level>=mp[dist].second) {
+		mp[dist] = {root->data, level};
+	}
+	bottomView1(root->left, level+1, dist-1, mp);
+	bottomView1(root->right, level+1, dist+1, mp);
+}
+void bottomView(node *root)
+{
+   map<int, pair<int, int> >mp;
+   bottomView1(root, 0, 0, mp);
+   for(auto val:mp){
+       cout<<val.second.first<<" ";
+   }
+}
+
+void topView1(node *root, int level, int dist, map<int, pair<int, int> > &mp) {
+	if(root == NULL) {
+		return;
+	}
+	if(mp.find(dist) == mp.end() or level<mp[dist].second) {
+		mp[dist] = {root->data, level};
+	}
+	topView1(root->left, level+1, dist-1, mp);
+	topView1(root->right, level+1, dist+1, mp);
+}
+void topView(node *root)
+{
+   map<int, pair<int, int> >mp;
+   topView1(root, 0, 0, mp);
+   for(auto val:mp){
+       cout<<val.second.first<<" ";
+   }
+}
+
+void topViewIterative(node *root) {
+	queue<pair<node *, int>> qu;
+	qu.push({root, 0});
+	map<int, int>mp;
+	while(!qu.empty()) {
+		node* temp = qu.front().first;
+		int dist = qu.front().second;
+		qu.pop();
+		if(mp.find(dist) == mp.end()) {
+			cout<<temp->data<<" ";
+			mp[dist] = temp->data;
+		}
+		if(temp->left) {
+			qu.push({temp->left, dist-1});
+		}
+		if(temp->right) {
+			qu.push({temp->right, dist+1});
+		}
+	}
+}
+
 int treePathsSumHelper(node *root, int val) { 
     if (root == NULL)  
     	return 0; 
@@ -473,6 +533,41 @@ int treePathsSum(node *root) {
     return treePathsSumHelper(root, 0); 
 } 
 
+int areTreesIdentical(node *root1, node *root2) {
+	if(root1==NULL and root2==NULL) {
+		return 1;
+	}
+	if(root1!=NULL and root2!=NULL) {
+		int leftAns = areTreesIdentical(root1->left, root2->left);
+		int rightAns = areTreesIdentical(root1->right, root2->right);
+		return (root1->data and root2->data) and leftAns and rightAns;
+	}
+	return 0;
+}
+
+int areTreesStructurallyIdentical(node *root1, node *root2) {
+	if(root1==NULL and root2==NULL) {
+		return 1;
+	}
+	if(root1!=NULL and root2!=NULL) {
+		int leftAns = areTreesStructurallyIdentical(root1->left, root2->left);
+		int rightAns = areTreesStructurallyIdentical(root1->right, root2->right);
+		return leftAns and rightAns;
+	}
+	return 0;
+}
+
+int sumAtLevelK(node *root, int k) {
+	if(root==NULL) {
+		return 0;
+	}
+	if(k<=0) {
+		return root->data;
+	}
+	int leftAns = sumAtLevelK(root->left, k-1);
+	int rightAns = sumAtLevelK(root->right, k-1);
+	return leftAns+rightAns;
+}
 
 int main(){
 	node*root = buildLevelOrder();//buildRec();
@@ -485,7 +580,8 @@ int main(){
 	//replaceChildSum(root);
 	//printPre(root);
 	// printLevelOrder(root);
-	levelOrderZigZag(root);
+	// levelOrderZigZag(root);
+	topView(root);
 
 
 	return 0;
