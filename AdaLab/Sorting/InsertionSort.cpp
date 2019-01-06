@@ -9,18 +9,17 @@ using namespace std::chrono;
 
 
 void InsertionSort(int arr[], int n) {
-    for(int i = 1; i < n; i++) {
-        int j = i-1;
-        while(j>=0 and arr[j]>arr[i]) {
-            j--;
-        }
-        j++;
-        int temp = arr[i];
-        for(int var = i - 1; var >= j; var--) {
-            arr[var+1] = arr[var];
-        }
-        arr[j] = temp;
-    }
+    int i, key, j; 
+    for (i = 1; i < n; i++) { 
+       key = arr[i]; 
+       j = i-1; 
+       while (j >= 0 && arr[j] > key) 
+       { 
+           arr[j+1] = arr[j]; 
+           j = j-1; 
+       } 
+       arr[j+1] = key; 
+   } 
     return;
 }
 

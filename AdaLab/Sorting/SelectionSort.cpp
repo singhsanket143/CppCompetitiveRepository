@@ -11,6 +11,7 @@ using namespace std::chrono;
 void selectionSort(int arr[], int n) {
     int min_idx =0;
     for(int i = 0; i < n - 1; i++) {
+        min_idx = i;
         for(int j = i; j < n; j++) {
             min_idx = (arr[j]<arr[min_idx])?j:min_idx;
         }
