@@ -1,12 +1,21 @@
 #include <iostream>
 using namespace std;
 
-int stockSelling(int *arr, int si, int n, int k) {
 
-	if(k > 0) {
-		int retval1 = arr[si]+stockSelling(arr, si+1, n, k-1);
+int stockSelling(int *arr,int n, int k) {
+
+	int dp[k+1][n+1];
+	for(int i=0;i<k;i++) {
+		dp[i][0] = 0;
 	}
-	
+	for(int i=0;i<n;i++) {
+		dp[0][i] = 0;
+	}
+	for(int i=0;i<k;i++) {
+		for(int j=0;j<n;j++) {
+		
+		}
+	}
 }
 int main(int argc, char const *argv[])
 {
