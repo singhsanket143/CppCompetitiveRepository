@@ -14,9 +14,9 @@ int CoinChangeBottomUp(int *coins, int value, int n) {
                 dp[j] += dp[j-coins[i]];
         }
     }
-    for(int i=0;i<=value;i++) {
-        cout<<dp[i]<<",";
-    }
+    // for(int i=0;i<=value;i++) {
+    //     cout<<dp[i]<<",";
+    // }
     return dp[value];
 }
 

@@ -1,3 +1,11 @@
+/*
+Given two strings of lowercase alphabets and a value k, the task is to find if two strings are K-anagrams of each other or not.
+
+Two strings are called k-anagrams if following two conditions are true.
+
+Both have same number of characters.
+Two strings can become anagram by changing at most k character
+*/
 #include "iostream"
 using namespace std;
 
