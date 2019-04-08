@@ -6,7 +6,7 @@ using namespace std;
 int dp[10][30];
 int knapSackBtr(int* vals, int* wts, int wt, int si, int storage[][30], int n) {
 		if (si == n || wt <= 0) {
-			return 0;
+			return 0; 
 		}
 
 		if (storage[wt][si] != 0) {

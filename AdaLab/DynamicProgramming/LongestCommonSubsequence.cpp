@@ -1,7 +1,7 @@
 /*
 By Sanket Singh
 */
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 void lcsprint( char *X, char *Y, int m, int n )
@@ -56,6 +56,12 @@ int lcsdp( char *X, char *Y, int m, int n )
        else
          L[i][j] = max(L[i-1][j], L[i][j-1]); 
      } 
+   }
+   for(int i=0;i<=m;i++) {
+     for(int j=0;j<=n;j++) {
+	cout<<L[i][j]<<" ";
+     }
+     cout<<endl;
    } 
    return L[m][n]; 
 } 
@@ -78,7 +84,7 @@ int main(int argc, char const *argv[])
   	int m = strlen(X); 
   	int n = strlen(Y); 
 	printf("Length of LCS is %d\n", lcs( X, Y, m, n ) );
-	printf("Length of LCS BY DP is %d\n", lcs( X, Y, m, n ) );
+	printf("Length of LCS BY DP is %d\n", lcsdp( X, Y, m, n ) );
 	lcsprint(X, Y, m, n);
 	return 0;
 }
