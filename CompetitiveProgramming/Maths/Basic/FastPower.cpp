@@ -12,6 +12,7 @@ int power(int a, int b) {
     }
     return result;
 }
+
 int main(int argc, char* argv[])
 {
     cout<<power(2,5);
