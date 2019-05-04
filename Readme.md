@@ -1,1 +1,2 @@
-This repository contains the codes for different data structures and algirithms in C++
+# CppCompetitiveRepository
+All the competitive programming codes done arranged by judges
