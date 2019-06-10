@@ -1,4 +1,6 @@
 #include <iostream>
+#include "vector";
+#include "algorithm";
 using namespace std;
 
 int maximumProduct1(vector<int> &nums) // O(logN) solution
