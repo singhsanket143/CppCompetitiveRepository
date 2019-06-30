@@ -17,14 +17,14 @@ class Graph {
 public:
 	Graph(int v, int e) {
 		this->v = v;
-          this->e = e;
+    this->e = e;
 		edge = new Edge[e];
 	}
 
 	void addEdge(int u, int v, int w,int count, bool bidir = true) {
 		edge[count].src = u;
-          edge[count].dest = v;
-          edge[count].weight = w;
+    edge[count].dest = v;
+    edge[count].weight = w;
 	}
 
      void print() {
@@ -41,8 +41,8 @@ public:
                else
                     distance[i] = inf;
           }
-          for(int i=1;i<=v-1;i++) {
-               for(int j=0;j<e;j++) {
+          for(int i=1;i<=this->v-1;i++) {
+               for(int j=0;j<this->e;j++) {
                     int src = edge[j].src;
                     int dest = edge[j].dest;
                     int wt = edge[j].weight;
@@ -67,10 +67,10 @@ public:
           for (int i = 0; i < v; ++i) 
                printf("%d - %d\n", i, distance[i]); 
           return;
-     }
+ 
 
 };
-
+    }
 int main(int argc, char const *argv[])
 {
      int n, e;

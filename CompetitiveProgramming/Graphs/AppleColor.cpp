@@ -91,6 +91,7 @@ void floodFill(char mat[][50],int i,int j,char ch,char color){
 
 	printMat(mat);
 	cout<<endl;
+	system("clear");
 
 	mat[i][j] = color;
 

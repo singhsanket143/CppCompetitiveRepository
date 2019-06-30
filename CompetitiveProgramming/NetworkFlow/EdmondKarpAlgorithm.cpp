@@ -1,4 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include<queue>
+#include<vector>
+#include<stdlib.h>
+
 using namespace std;
 
 bool bfs(int **residualCapacity, int source, int sink, int n, int *parent) {
@@ -69,7 +73,7 @@ int maxFlow(int **capacity, int source, int sink, int v) {
         while(v!=source) {
             int u = parent[v];
             residualCapacity[u][v] -= flow;
-            residualCapacity[u][v] += flow;
+            residualCapacity[v][u] += flow;
             v= u;
         }
     }
@@ -90,5 +94,6 @@ int main() {
         cin>>u>>v>>c;
         capacity[u][v] = c;
     }
+    cout<<"ok";
     cout<<maxFlow(capacity, 0, 1, v);
 }
