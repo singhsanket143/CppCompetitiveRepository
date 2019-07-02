@@ -1,7 +1,7 @@
 /*
 By Sanket Singh
 */
-#include <bits/stdc++.h> 
+#include <iostream> 
 using namespace std; 
 class Activitiy 
 { 
