@@ -1,4 +1,3 @@
-package assignments.asgn8b;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,8 +9,8 @@ public class Q6 {
 
 		int N = scn.nextInt();
 		System.out.println(countNKnights(new boolean[N][N], 0, 0, 0));
-		printNKnights(new boolean[N][N], 0, 0, 0, "");
-		System.out.println(getNKnights(new boolean[N][N], 0, 0, 0));
+		// printNKnights(new boolean[N][N], 0, 0, 0, "");
+		// System.out.println(getNKnights(new boolean[N][N], 0, 0, 0));
 	}
 
 	public static int countNKnights(boolean[][] board, int placed, int sr, int sc) {
