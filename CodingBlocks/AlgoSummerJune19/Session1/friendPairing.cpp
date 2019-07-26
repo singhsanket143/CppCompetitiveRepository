@@ -12,6 +12,8 @@ int frnd(int n) {
 int main(int argc, char const *argv[])
 {
 	/* code */
-	cout<<frnd(3);
+	int n;
+	cin>>n;
+	cout<<frnd(n);
 	return 0;
 }
