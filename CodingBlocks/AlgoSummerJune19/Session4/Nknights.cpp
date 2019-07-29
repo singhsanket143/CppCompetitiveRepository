@@ -8,7 +8,7 @@ void print(bool **visited, int n) {
 				cout<<".";
 			} else {
 				cout<<"K";
-			}
+				}
 		}
 		cout<<"\n";
 	}
@@ -35,8 +35,8 @@ bool isItSafe(int n, int row, int col, bool **visited) {
 void Nknights(int n, bool **visited, int sr, int sc, int placed) {
 	if(placed == n) {
 		config++;
-		print(visited, n);
-		cout<<"*********************\n";
+		//print(visited, n);
+		//cout<<"*********************\n";
 		return;
 	}
 
