@@ -42,9 +42,10 @@ void postOrder(Node *root) {
 	if (root == NULL) {
 		return;
 	}
-	cout << root->data << ",";
-	postOrder(root->right);
 	postOrder(root->left);
+	postOrder(root->right);
+	cout << root->data << ",";
+
 
 }
 
@@ -149,16 +150,64 @@ int diameterOfBinaryTree(Node* root) {
 	return p.diameter;
 }
 
+int maxPathFromRoot2Leaf(Node* root) {
+	if (root == NULL) return 0;
+
+	int left = maxPathFromRoot2Leaf(root->left);
+	int right = maxPathFromRoot2Leaf(root->right);
+
+	return max(left, right) + root->data;
+}
+
+int maxsum = 0;
+
+int maxSumFromLeaf2Leaf(Node* root) {
+	if (root == NULL) return 0;
+
+	int left = maxSumFromLeaf2Leaf(root->left);
+	int right = maxSumFromLeaf2Leaf(root->right);
+	int cand = left + right + root->data;
+	if (maxsum < cand) maxsum = cand;
+	return max(left, right) + root->data;
+}
+
+int maxSum = INT_MIN;
+int helper(Node* root) {
+	if (root == NULL) {
+		return 0;
+	}
+	int left = helper(root->left);
+	int right = helper(root->right);
+
+	int cand1 = root->val;
+	int cand2 = left + root->val;
+	int cand3 = right + root->val;
+	int cand4 = left + right + root->val;
+
+	maxSum = max(cand1, max(cand2, max(cand3, max(cand4, maxSum))));
+
+	return max(left, max(right, 0)) + root->val;
+	// return max(left, right) + root->val;
+
+
+}
+int maxPathSum(Node* root) {
+	helper(root);
+	return maxSum;
+}
+
 int main(int argc, char const *argv[])
 {
 	Node* root = buildTree();
-	preOrder(root);
-	cout << endl;
-	levelOrder(root);
-	cout << endl;
-	cout << vertexCover(root);
-	cout << endl;
-	cout << minHeight(root) << endl;
-	cout << maxHeight(root) << endl;
+	// preOrder(root);
+	// cout << endl;
+	// levelOrder(root);
+	// cout << endl;
+	// cout << vertexCover(root);
+	// cout << endl;
+	// cout << minHeight(root) << endl;
+	// cout << maxHeight(root) << endl;
+	// maxSumFromLeaf2Leaf(root);
+	// cout << maxSum;
 	return 0;
 }
