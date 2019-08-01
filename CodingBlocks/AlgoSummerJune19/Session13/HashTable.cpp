@@ -89,6 +89,17 @@ public:
 		}
 	}
 
+	T search(string key) {
+		int idx = hashFunc(key);
+		Node<T>* temp = this->arr[idx];
+		while(temp!=NULL) {
+			if(temp->key == key) {
+				return temp->value;
+			}
+			temp = temp->next;
+		}
+		return NULL;
+	}
 	
 };
 
@@ -106,6 +117,12 @@ int main(int argc, char const *argv[])
 	(*hash).insert("applepie", 217);
 	(*hash).insert("api", 27);	
 	(*hash).display();
-
+	int getValue = (*hash).search("api");
+	//cout<<(*hash).search("api");
+	if(getValue==NULL) {
+		cout<<"Not found";
+	} else {
+		cout<<getValue;
+	}
 	return 0;
 }
