@@ -31,14 +31,16 @@ void ratmaze(int n, int i, int j) {
 
 int main(int argc, char const *argv[])
 {
-	int n=7;
+	for(int n = 1; n < 10; n++) {
 	for(int i=0;i<n;i++) {
 		for(int j=0;j<n;j++) {
-			cin>>arr[i][j];
+			arr[i][j] = 0;
+			// cin>>arr[i][j];
 			visited[i][j] = false;
 		}
 	}
 	ratmaze(n, 0, 0);
-	cout<<result;
+	cout<<result<<endl;
+	}
 	return 0;
 }
