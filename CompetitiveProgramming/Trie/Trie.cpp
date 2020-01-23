@@ -60,8 +60,6 @@ public:
 };
 
 int main(){
-
-
 	Trie t;
 	char words[][10] = {"a","hello","not","news","not"};
 	char w[10];
