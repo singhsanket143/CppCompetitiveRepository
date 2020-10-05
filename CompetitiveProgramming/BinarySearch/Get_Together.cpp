@@ -29,6 +29,7 @@ int main(int argc, char const *argv[]) {
 		cin>>pos[i];
 		cin>>vel[i];
 	}
+	//
 	cout.precision(9);
 	long double lo = 1e-10, hi = 1e10;
 	while(hi - lo > 1e-7) {
