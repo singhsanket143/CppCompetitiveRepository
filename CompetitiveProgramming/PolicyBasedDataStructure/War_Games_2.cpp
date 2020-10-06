@@ -1,8 +1,8 @@
-// Problem Link - https://codeforces.com/edu/course/2/lesson/6/3/practice/contest/285083/problem/B
+// Problem Link - https://acm.timus.ru/problem.aspx?space=1&num=1521
 /* By Sanket Singh */
 #include<bits/stdc++.h>
-//#include<ext/pb_ds/assoc_container.hpp>
-//using namespace __gnu_pbds;
+#include<ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 #define ll 				long long int
 #define mod             1000000007
@@ -27,7 +27,7 @@ void err(istream_iterator<string> it, T a, Args... args) {
 	cout << *it << " = " << a << endl;
 	err(++it, args...);
 }
-//typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 
 void file_i_o()
 {
@@ -44,35 +44,17 @@ int main(int argc, char const *argv[]) {
 	file_i_o();
 	int n, k;
 	cin>>n>>k;
-	ll *arr = new ll[n];
+	pbds set;
 	loop(i, 0, n-1) {
-		cin>>arr[i];
+		set.insert(i+1);
 	}
-	ll lo = 1, hi = 1e15;
-	ll result = 1;
-	while(lo <= hi) {
-		ll mid = lo + (hi - lo) / 2;
-		int count_seg = 1;
-		ll sum = 0, ans = 0;
-		for(int i = 0; i < n; i++) {
-			if(sum + arr[i] > mid) {
-				ans = max(ans, sum);
-				sum = 0;
-				count_seg++;
-				if(count_seg > k) break;
-			}
-			sum += arr[i];
-		}
-		ans = max(ans, sum);
-		if(count_seg > k) {
-			lo = mid + 1;
-		} else {
-			if(count_seg == k) {
-				result = ans;
-			}
-			hi = mid - 1;
-		}
+	int spot = 0;
+	while(n > 0) {
+		spot = (spot + k - 1)%n;
+		auto it = set.find_by_order(spot);
+		cout<<*it<<endl;
+		set.erase(it);
+		n--;
 	}
-	cout<<result;
 	return 0;
 }

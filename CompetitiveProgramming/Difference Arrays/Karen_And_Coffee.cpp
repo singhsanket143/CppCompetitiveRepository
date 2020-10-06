@@ -1,4 +1,4 @@
-// Problem Link - https://codeforces.com/edu/course/2/lesson/6/3/practice/contest/285083/problem/B
+// Problem Link - https://codeforces.com/contest/816/problem/B
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -19,7 +19,9 @@ using namespace std;
 #define mid(l,r)        (l+(r-l)/2)
 #define loop(i,a,b) 	for(int i=(a);i<=(b);i++)
 #define looprev(i,a,b) 	for(int i=(a);i>=(b);i--)
-#define log(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
+#define log(args...) 	{ string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
+#define logarr(arr,a,b)	for(int i=(a);i<=(b);i++) {cout<<(arr[i])<<" ";} cout<<endl;	
+
 
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
@@ -42,37 +44,32 @@ void file_i_o()
 
 int main(int argc, char const *argv[]) {
 	file_i_o();
-	int n, k;
-	cin>>n>>k;
-	ll *arr = new ll[n];
+	int n, k, q;
+	cin>>n>>k>>q;
+	vi temp(200001, 0);
 	loop(i, 0, n-1) {
-		cin>>arr[i];
+		int li, ri;
+		cin>>li>>ri;
+		temp[li]++;
+		if(ri + 1 < temp.size()) temp[ri+1]--;
 	}
-	ll lo = 1, hi = 1e15;
-	ll result = 1;
-	while(lo <= hi) {
-		ll mid = lo + (hi - lo) / 2;
-		int count_seg = 1;
-		ll sum = 0, ans = 0;
-		for(int i = 0; i < n; i++) {
-			if(sum + arr[i] > mid) {
-				ans = max(ans, sum);
-				sum = 0;
-				count_seg++;
-				if(count_seg > k) break;
-			}
-			sum += arr[i];
-		}
-		ans = max(ans, sum);
-		if(count_seg > k) {
-			lo = mid + 1;
-		} else {
-			if(count_seg == k) {
-				result = ans;
-			}
-			hi = mid - 1;
-		}
+
+	loop(i, 1, temp.size()-1) {
+		temp[i] = temp[i] + temp[i-1];
 	}
-	cout<<result;
+
+	loop(i, 0, temp.size()-1) {
+		if(temp[i] >= k) temp[i] = 1;
+		else temp[i] = 0;
+	}
+	loop(i, 1, temp.size()-1) {
+		temp[i] = temp[i] + temp[i-1];
+	}
+
+	while(q--) {
+		int li, ri;
+		cin>>li>>ri;
+		cout<<temp[ri] - temp[li-1]<<endl;
+	}
 	return 0;
 }

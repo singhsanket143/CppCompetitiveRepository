@@ -42,7 +42,8 @@ int main(int argc, char const *argv[]) {
 			if(count == 0) {
 				ans = min(ans, v[right-1].ff - v[left].ff);
 			}
-			cnt[v[left].ss]--;
+			if(cnt[v[left].ss]] > 0)
+				cnt[v[left].ss]--;
 			count += cnt[v[left].ss] == 0;
 		}
 		cout<<ans<<"\n";
