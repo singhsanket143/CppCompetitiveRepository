@@ -1,10 +1,2 @@
-down
-down
-up
-left
-left
-up
-up
-up
-left
-left
+6 2
+3 1 8 5 7 2
