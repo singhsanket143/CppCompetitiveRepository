@@ -59,9 +59,17 @@ int main(int argc, char* argv[])
 {
 
 
-    primeSieve(100000, sieve);
-    for(int i = 0; i <= 25; i++) {
-        cout<<sieve[i]<<" ";
+    // primeSieve(100000, sieve);
+    // for(int i = 0; i <= 25; i++) {
+    //     cout<<sieve[i]<<" ";
+    // }
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+    gen_primes();
+    for(int i=0;i<100;i++) {
+        cout<<primearray[i]<<" ";
     }
     return 0;
 }
