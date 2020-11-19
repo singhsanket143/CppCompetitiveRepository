@@ -1,3 +1,4 @@
+//https://www.hackerearth.com/problem/algorithm/can-you-handle-the-weights/
 #include <bits/stdc++.h>
 #define ll long long int
 using namespace std;
