@@ -1,0 +1,12 @@
+5 11
+union 1 2
+get 3
+get 2
+union 2 3
+get 2
+union 1 3
+get 5
+union 4 5
+get 5
+union 4 1
+get 5
