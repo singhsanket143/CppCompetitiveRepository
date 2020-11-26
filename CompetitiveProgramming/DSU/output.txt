@@ -1,7 +1,14 @@
-YES
-YES
-NO
-NO
+m1 = 3
+m2 = 1
+h = 1
+x = 1
+m1 = 1
+m2 = 3
+h = 2
+x = 1
+-1
+-1
+1
 
 
-Executed In: 0.761 ms
+Executed In: 0.261 ms
