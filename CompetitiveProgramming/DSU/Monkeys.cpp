@@ -55,6 +55,94 @@ void file_i_o()
 	#endif
 }
 
+class Graph {
+public:
+	int v;
+	pii *adj;
+	set<ll> *adjlist;
+	Graph(int v) {
+		this->v = v;
+		adj = new pii[v];
+		adjlist = new set<ll>[v];
+	}
+	void addEdge(ll x, ll l, ll r) {
+		adj[x] = {l, r};
+		if(l != -1) {
+			adjlist[l].insert(x);
+			adjlist[x].insert(l);
+		}
+		if(r != -1) {
+			adjlist[r].insert(x);
+			adjlist[x].insert(r);
+		}
+	}
+
+	void addHand(ll x, ll h, ll v) {
+		if(h == 1) {
+			adj[x].ff = v;
+			adjlist[v].insert(x);
+			adjlist[x].insert(v);
+
+		}
+		else {
+			adj[x].ss = v;
+			adjlist[v].insert(x);
+			adjlist[x].insert(v);
+		}
+
+	}
+
+	ll Get(vi &parent, ll a) {
+		return parent[a] = (parent[a] == a ? a : Get(parent, parent[a]));
+	}
+
+	void dfsHelper(ll src, ump<int, bool> &visited, ll val, vi &ans, vi &parent) {
+     	visited[src] = true;
+     	// cout<<src<<endl;
+     	if(ans[src] == -2 and Get(parent, src) == 1)
+     		ans[src] = val;
+     	// if(adj[src].ff!=-1) {
+     	// 	if(!visited[adj[src].ff]) {
+     	// 		dfsHelper(adj[src].ff, visited, val, ans, parent);
+     	// 	}
+     	// }
+     	// if(adj[src].ss!=-1) {
+     	// 	if(!visited[adj[src].ss]) {
+     	// 		dfsHelper(adj[src].ss, visited, val, ans, parent);
+     	// 	}
+     	// }
+
+     	for(auto i : adjlist[src]) {
+     		if(ans[i] == -2 and !visited[i]) {
+     			dfsHelper(i, visited, val, ans, parent);
+     		}
+     	}
+     }
+
+	void dfs(ll root, ll val, vi &ans, vi &parent) {
+		ump<int, bool> visited;
+     	dfsHelper(root, visited, val, ans, parent);
+     	adjlist[root].clear();
+	}
+
+	void removeEdge(ll x, ll h) {
+		if(h == 1) {
+			adjlist[x].erase(adj[x].ff);
+			adj[x].ff = -1;
+		}
+		else {
+			adjlist[x].erase(adj[x].ss);
+			adj[x].ss = -1;
+		}
+	}
+
+	void print() {
+		for(int i = 1; i < v; i++) {
+			cout<<adj[i].ff<<" "<<adj[i].ss<<endl;
+		}
+	}
+};
+
 ll Get(vi &parent, ll a) {
 	return parent[a] = (parent[a] == a ? a : Get(parent, parent[a]));
 }
@@ -62,6 +150,7 @@ ll Get(vi &parent, ll a) {
 void Union(vi &parent, vi &rank, ll a, ll b) {
 	a = Get(parent, a);
 	b = Get(parent, b);
+	if(a == b) return;
 	if(a == 1) {
 		parent[b] = a;
 		return;
@@ -91,12 +180,15 @@ int main(int argc, char const *argv[]) {
 	loop(i, 0, n) {
 		parent[i] = i;
 	}
+	Graph g(n+1);
+
 	vector<pair<int, int> > monkey(n+1);
 	loop(i, 1, n) {
 		int l, r;
 		cin>>l>>r;
 		monkey[i].ff = l;
 		monkey[i].ss = r;
+		g.addEdge(i, l, r);
 	}
 	vector<pair<int, int> > query(m);
 	loop(i, 0, m-1) {
@@ -104,20 +196,37 @@ int main(int argc, char const *argv[]) {
 		cin>>m>>h;
 		query[i].ff = m;
 		query[i].ss = h;
+		g.removeEdge(m, h);
 	}
-	vector<int> ans(n+1, -1);
+	// g.print();
+	for(int i=1;i<=n;i++) {
+		if(g.adj[i].ff != -1) {
+			Union(parent, rank, i, g.adj[i].ff);
+		}
+		if(g.adj[i].ss != -1) {
+			Union(parent, rank, i, g.adj[i].ss);
+		}
+	}
+	vector<ll> ans(n+1, -2);
+	for(int i=1;i<=n;i++) {
+		int x = Get(parent, i);
+		if(x == 1) ans[i] = -1;
+	}
 	for(int i = m-1; i >= 0; i--) {
 		int m1 = query[i].ff;
 		int h = query[i].ss;
 		int m2 = (h == 1) ? monkey[m1].ff : monkey[m1].ss;
-		
-		Union(parent, rank, m1, m2);
+		if(m1 == m2) continue;
+		if(Get(parent, m1) == 1 and Get(parent, m2) == 1) continue;
+ 		Union(parent, rank, m1, m2);
 		int x = Get(parent, m1);
-		log(m1, m2, h, x);
+		g.addHand(m1, h, m2);
+		// log(m1, m2, h, x);
 		if(x == 1) {
-			loop(j, 1, n) {
-				if(ans[j] == -1 and Get(parent, j) == 1) ans[j] = i;
-			}
+			g.dfs(m1, i, ans, parent);
+			// loop(j, 1, n) {
+			// 	if(ans[j] == -2 and Get(parent, j) == 1) ans[j] = i;
+			// }
 		}
 	}
 	ans[1] = -1;
