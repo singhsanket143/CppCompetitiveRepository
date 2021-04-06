@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://atcoder.jp/contests/dp/tasks/dp_h
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -58,37 +58,30 @@ int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	string str;
-	int count = 0;
-	while(true) {
-		cin>>str;
-		if(str[0] == '-') break;
-		stack<char> st;
-		ll closing = 0; // keeps the count of unbalanced closing braces
-		ll ans = 0;
-		// who will keep the track of unbalanced opening braces ? the stack
-		loop(i, 0, str.size()-1) {
-			if(str[i] == '{') st.push('{');
-			else {
-				if(not st.empty()) {
-					st.pop();
-				} else {
-					closing++;
-				}
-			}
+	int n, m;
+	cin>>n>>m;
+	vector<vector<char> > grid(n+1, vector<char> (m+1));
+	loop(i, 1, n) {
+		string s;
+		cin>>s;
+		loop(j, 1, m) {
+			grid[i][j] = s[j-1];
 		}
-		if(st.size() > 0) {
-			if(st.size() % 2 != 0) {
-				closing--;
-				ans += 2;
-			}
-			ans += st.size()/2;
-		}
-		if(closing > 0) {
-			ans += closing/2;
-		}
-		cout<<++count<<". "<<ans<<endl;
 	}
+	vector<vector<ll> > dp(n+1, vector<ll> (m+1, 0));
+	dp[n][m] = 1;
+	looprev(i, n, 1) {
+		looprev(j, m, 1) {
+			if(i == n and j == m) 
+				continue;
+			if(grid[i][j] == '#') {
+				dp[i][j] = 0;
+				continue;
+			}
+			dp[i][j] = (((i == n)?0:dp[i+1][j])%mod + ((j == m)?0:dp[i][j+1])%mod)%mod;
+		}
+	}
+	cout<<dp[1][1];
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

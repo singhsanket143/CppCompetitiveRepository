@@ -16,7 +16,6 @@ using namespace std;
 #define vs				vector<string>
 #define pii             pair<ll,ll>
 #define ump				unordered_map
-#define mp 				make_pair
 #define pq_max          priority_queue<ll>
 #define pq_min          priority_queue<ll,vi,greater<ll> >
 #define all(n) 			n.begin(),n.end()
@@ -58,36 +57,27 @@ int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	string str;
-	int count = 0;
+
+	char ch;
+	queue<char> qu;
+	ump<char, int> mp;
 	while(true) {
-		cin>>str;
-		if(str[0] == '-') break;
-		stack<char> st;
-		ll closing = 0; // keeps the count of unbalanced closing braces
-		ll ans = 0;
-		// who will keep the track of unbalanced opening braces ? the stack
-		loop(i, 0, str.size()-1) {
-			if(str[i] == '{') st.push('{');
-			else {
-				if(not st.empty()) {
-					st.pop();
-				} else {
-					closing++;
-				}
-			}
+		cout<<"Enter next character"<<endl;
+		cin>>ch;
+		if(ch == '0') break;
+		if(mp.count(ch) == 0) {
+			// entry noot present in map
+			mp[ch] = 1;
+			qu.push(ch);
+		} else {
+			mp[ch] += 1;
 		}
-		if(st.size() > 0) {
-			if(st.size() % 2 != 0) {
-				closing--;
-				ans += 2;
-			}
-			ans += st.size()/2;
+		while(not qu.empty() and mp[qu.front()] != 1) qu.pop();
+		if(not qu.empty()) cout<<qu.front()<<endl;
+		else {
+			cout<<"-1\n";
 		}
-		if(closing > 0) {
-			ans += closing/2;
-		}
-		cout<<++count<<". "<<ans<<endl;
+
 	}
 
 	#ifndef ONLINE_JUDGE 

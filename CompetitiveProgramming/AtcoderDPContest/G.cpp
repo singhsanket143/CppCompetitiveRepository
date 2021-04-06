@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://atcoder.jp/contests/dp/tasks/dp_g
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -54,42 +54,39 @@ void file_i_o()
 	#endif
 }
 
+vector<int> graph[100005];
+int dp[100005];
+
+int findLongestPath(int src) {
+	if(dp[src] != -1) return dp[src];
+
+	bool leaf = 1;
+	int maxValue = 0;
+	for(int child: graph[src]) {
+		leaf = 0;
+		maxValue = max(maxValue, findLongestPath(child));
+	}
+	return dp[src] = leaf ? 0 : 1 + maxValue;
+}
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	string str;
-	int count = 0;
-	while(true) {
-		cin>>str;
-		if(str[0] == '-') break;
-		stack<char> st;
-		ll closing = 0; // keeps the count of unbalanced closing braces
-		ll ans = 0;
-		// who will keep the track of unbalanced opening braces ? the stack
-		loop(i, 0, str.size()-1) {
-			if(str[i] == '{') st.push('{');
-			else {
-				if(not st.empty()) {
-					st.pop();
-				} else {
-					closing++;
-				}
-			}
-		}
-		if(st.size() > 0) {
-			if(st.size() % 2 != 0) {
-				closing--;
-				ans += 2;
-			}
-			ans += st.size()/2;
-		}
-		if(closing > 0) {
-			ans += closing/2;
-		}
-		cout<<++count<<". "<<ans<<endl;
+	memset(dp, -1, sizeof(dp));
+	int n, m;
+	cin>>n>>m;
+	loop(i, 0, m-1) {
+		int x, y;
+		cin>>x>>y;
+		graph[x].pb(y);
 	}
 
+	int result = INT_MIN;
+	loop(i, 1, n) {
+		result = max(result, findLongestPath(i));
+	}
+	cout<<result;
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

@@ -58,36 +58,27 @@ int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	string str;
-	int count = 0;
-	while(true) {
-		cin>>str;
-		if(str[0] == '-') break;
-		stack<char> st;
-		ll closing = 0; // keeps the count of unbalanced closing braces
+	ump<int, ump<int, int> > field;
+	int t;
+	cin>>t;
+	while(t--) {
+		ll n, m, k;
+		cin>>n>>m>>k;
+		ll x, y;
 		ll ans = 0;
-		// who will keep the track of unbalanced opening braces ? the stack
-		loop(i, 0, str.size()-1) {
-			if(str[i] == '{') st.push('{');
-			else {
-				if(not st.empty()) {
-					st.pop();
-				} else {
-					closing++;
-				}
+		int dx[] = {-1,1,0,0};
+		int dy[] = {0,0,-1,1};
+		while(k--) {
+			cin>>x>>y;
+			loop(i, 0, 3) {
+				int new_x = x + dx[i];
+				int new_y = y + dy[i];
+				ans += field[new_x][new_y] ? -1 : 1;
 			}
+			field[x][y] = 1;
 		}
-		if(st.size() > 0) {
-			if(st.size() % 2 != 0) {
-				closing--;
-				ans += 2;
-			}
-			ans += st.size()/2;
-		}
-		if(closing > 0) {
-			ans += closing/2;
-		}
-		cout<<++count<<". "<<ans<<endl;
+		cout<<ans<<"\n";
+		field.clear();
 	}
 
 	#ifndef ONLINE_JUDGE 

@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://atcoder.jp/contests/dp/tasks/dp_i
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -54,42 +54,26 @@ void file_i_o()
 	#endif
 }
 
+double dp[3005][3005];
+double atleastXHead(vector<double> &arr, int i, int x) {
+	if(x == 0) return 1;
+	if(i == 0) return 0;
+	if(dp[i][x] > -0.9) return dp[i][x];
+	return dp[i][x] = arr[i]*atleastXHead(arr, i-1, x-1) + (1-arr[i])*atleastXHead(arr, i-1, x);
+}
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	string str;
-	int count = 0;
-	while(true) {
-		cin>>str;
-		if(str[0] == '-') break;
-		stack<char> st;
-		ll closing = 0; // keeps the count of unbalanced closing braces
-		ll ans = 0;
-		// who will keep the track of unbalanced opening braces ? the stack
-		loop(i, 0, str.size()-1) {
-			if(str[i] == '{') st.push('{');
-			else {
-				if(not st.empty()) {
-					st.pop();
-				} else {
-					closing++;
-				}
-			}
-		}
-		if(st.size() > 0) {
-			if(st.size() % 2 != 0) {
-				closing--;
-				ans += 2;
-			}
-			ans += st.size()/2;
-		}
-		if(closing > 0) {
-			ans += closing/2;
-		}
-		cout<<++count<<". "<<ans<<endl;
-	}
 
+	int n;
+	cin>>n;
+	vector<double> arr(n+1);
+	memset(dp, -1, sizeof(dp));
+	loop(i, 1, n) cin>>arr[i];
+	//logarr(arr, 0, n-1);
+	cout << fixed << setprecision(9) << atleastXHead(arr, n, (n+1)/2);
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

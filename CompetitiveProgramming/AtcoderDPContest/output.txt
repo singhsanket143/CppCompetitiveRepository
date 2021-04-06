@@ -1,3 +1,3 @@
+0.612000000
 
-
-Executed In: 0.291 ms
+Executed In: 39.192000000 ms
