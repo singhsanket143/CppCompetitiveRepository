@@ -64,12 +64,13 @@ int main(int argc, char const *argv[]) {
 			sum += arr[i];
 		}
 		ans = max(ans, sum);
+		if(count_seg == k) {
+				result = ans;
+			}
 		if(count_seg > k) {
 			lo = mid + 1;
 		} else {
-			if(count_seg == k) {
-				result = ans;
-			}
+			
 			hi = mid - 1;
 		}
 	}
