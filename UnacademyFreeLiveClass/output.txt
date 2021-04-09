@@ -1,28 +1,3 @@
-k = 3
-q = 9
-k = 3
-k = 3
-k = 3
-k = 3
-k = 3
-200
-k = 3
-q = 9
-k = 3
-k = 3
-k = 3
-k = 3
-k = 3
-162
-k = 3
-q = 9
-k = 3
-k = 3
-k = 3
-k = 3
-k = 3
-98
-abc  def  ghi 
+3
 
-
-Executed In: 1.038 ms
+Executed In: 197.988 ms
