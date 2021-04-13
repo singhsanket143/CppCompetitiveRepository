@@ -54,6 +54,25 @@ def countNodes(root):
 	return 1+c1+c2
 
 
+def height(root):
+	if(root == None):
+		return 0
+
+	return 1 + max(height(root.left), height(root.right))
+
+
+total_tilt = 0
+def tilt(root): # this function returns sum of nodes of tree
+	if(root == None):
+		return 0
+
+	global total_tilt
+	left_sum = tilt(root.left)
+	right_sum = tilt(root.right)
+	total_tilt += abs(left_sum - right_sum)
+	return left_sum + right_sum + root.data
+
+
 root = buildBTRec()
 print()
 preorder(root)
@@ -63,8 +82,9 @@ print()
 postorder(root)
 print()
 print(countNodes(root))
-
-
+print(height(root))
+tilt(root)
+print(total_tilt)
 """
 
 1
