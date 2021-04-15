@@ -7,7 +7,6 @@ class Node:
 		self.data = data
 
 
-
 def buildBTRec():
 	d = int(input())
 	if d == -1:
@@ -73,6 +72,27 @@ def tilt(root): # this function returns sum of nodes of tree
 	return left_sum + right_sum + root.data
 
 
+def levelorderlevelwise(root):
+	qu = []
+	if(root == None):
+		print("Empty tree")
+		return
+	qu.append(root)
+	qu.append(None)
+	while qu:
+		curr = qu.pop(0)
+		if curr == None:
+			print()
+			if qu:
+				qu.append(None)
+		else:
+			print(curr.data, end = " ")
+			if curr.left != None:
+				qu.append(curr.left)
+			if curr.right != None:
+				qu.append(curr.right)
+
+
 root = buildBTRec()
 print()
 preorder(root)
@@ -85,6 +105,7 @@ print(countNodes(root))
 print(height(root))
 tilt(root)
 print(total_tilt)
+levelorderlevelwise(root)
 """
 
 1
