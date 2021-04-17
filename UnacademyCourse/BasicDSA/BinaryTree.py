@@ -93,6 +93,60 @@ def levelorderlevelwise(root):
 				qu.append(curr.right)
 
 
+def topviewhelper(root, dist, mp):
+	if(root == None):
+		return
+
+	if mp.get(dist) == None:
+		mp[dist] = root.data
+
+	topviewhelper(root.left, dist-1, mp)
+	topviewhelper(root.right, dist+1, mp)
+	return
+
+
+def topview(root):
+	mp = {}
+	topviewhelper(root, 0, mp)
+	min_dist , max_dist = 10000000000, -10000000000
+	for k in mp.keys():
+		if k < min_dist:
+			min_dist = k
+		if k > max_dist:
+			max_dist = k 
+
+	i = min_dist
+	while i <= max_dist:
+		print(mp[i], end = " ")
+		i += 1
+
+def bottomviewhelper(root, dist, mp):
+	if(root == None):
+		return
+
+	
+	mp[dist] = root.data
+
+	bottomviewhelper(root.left, dist-1, mp)
+	bottomviewhelper(root.right, dist+1, mp)
+	return
+
+
+def bottomview(root):
+	mp = {}
+	bottomviewhelper(root, 0, mp)
+	min_dist , max_dist = 10000000000, -10000000000
+	for k in mp.keys():
+		if k < min_dist:
+			min_dist = k
+		if k > max_dist:
+			max_dist = k 
+
+	i = min_dist
+	while i <= max_dist:
+		print(mp[i], end = " ")
+		i += 1
+
 root = buildBTRec()
 print()
 preorder(root)
@@ -106,21 +160,27 @@ print(height(root))
 tilt(root)
 print(total_tilt)
 levelorderlevelwise(root)
+topview(root)
+print()
+bottomview(root)
 """
-
 1
 2
+-1
+-1
 3
--1
--1
--1
-4
 5
+7
+10
+-1
+-1
+33
+-1
+-1
+8
+-1
 -1
 6
--1
--1
-7
 -1
 -1
 
