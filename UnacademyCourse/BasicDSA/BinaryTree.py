@@ -1,3 +1,5 @@
+import sys
+
 class Node:
 	data = -1
 	left = None
@@ -147,22 +149,92 @@ def bottomview(root):
 		print(mp[i], end = " ")
 		i += 1
 
-root = buildBTRec()
-print()
-preorder(root)
-print()
-inorder(root)
-print()
-postorder(root)
-print()
-print(countNodes(root))
-print(height(root))
-tilt(root)
-print(total_tilt)
-levelorderlevelwise(root)
-topview(root)
-print()
-bottomview(root)
+def isBSTHelper(root):
+	if(root == None):
+		return (True, -sys.maxsize, sys.maxsize)
+
+	leftresult = isBSTHelper(root.left)
+	rightresult = isBSTHelper(root.right)
+	is_bst = (leftresult[0] == True) and (rightresult[0] == True) and (leftresult[1] < root.data) and (rightresult[2] >= root.data)
+	max_ = max(root.data, leftresult[1], rightresult[1])
+	min_ = min(root.data, leftresult[2], rightresult[2])
+	return (is_bst, max_, min_)
+
+
+
+def isBST(root):
+	result = isBSTHelper(root)
+	return result[0]
+
+
+def diameter_helper(root):
+	if root == None:
+		return (-1, 0)
+
+	lr = diameter_helper(root.left)
+	rr = diameter_helper(root.right)
+
+	h = max(lr[0], rr[0])+1
+	dia = max(lr[1], rr[1], lr[0]+rr[0]+2)
+	return (h, dia)
+
+def diameter(root):
+	result = diameter_helper(root)
+	return result[1]
+
+idx = 0
+def buildHelper(pre, ino, inlo, inhi, mp):
+	if inlo > inhi :
+		return None
+
+	global idx
+
+	nn = Node(pre[idx])
+	# s = -1
+	# for i in range(inlo, inhi+1):
+	# 	if(pre[idx] == ino[i]):
+	# 		s = i
+	# 		break
+
+	s = mp.get(pre[idx])
+
+	idx += 1
+	nn.left = buildHelper(pre, ino, inlo, s-1, mp)
+	nn.right = buildHelper(pre, ino, s + 1, inhi, mp)
+	return nn
+
+def buildBTUsingPREIN(pre, ino):
+	mp = {}
+	for i in range(len(ino)):
+		mp[ino[i]] = i
+
+	root = buildHelper(pre, ino, 0, len(ino)-1, mp)
+	return root
+
+# root = buildBTRec()
+# print()
+# preorder(root)
+# print()
+# inorder(root)
+# print()
+# postorder(root)
+# print()
+# print(countNodes(root))
+# print(height(root))
+# tilt(root)
+# print(total_tilt)
+# levelorderlevelwise(root)
+# topview(root)
+# print()
+# bottomview(root)
+# print()
+# print(isBST(root))
+
+pre = [4,5,2,3,6,7,1]
+ino = [5,4,6,3,7,2,1]
+
+root1 = buildBTUsingPREIN(pre, ino)
+postorder(root1)
 """
 1
 2
