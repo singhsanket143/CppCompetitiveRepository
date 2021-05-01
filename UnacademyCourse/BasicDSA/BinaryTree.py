@@ -211,14 +211,51 @@ def buildBTUsingPREIN(pre, ino):
 	root = buildHelper(pre, ino, 0, len(ino)-1, mp)
 	return root
 
-# root = buildBTRec()
-# print()
-# preorder(root)
-# print()
-# inorder(root)
-# print()
-# postorder(root)
-# print()
+def LCA_helper(root, a, b, present):
+	if root == None:
+		return None
+
+	lst = LCA_helper(root.left, a, b, present)
+	rst = LCA_helper(root.right, a, b, present)
+
+	if lst and rst:
+		return root 
+
+	if present[0] and present[1] and lst:
+		return lst 
+	if present[0] and present[1] and rst:
+		return rst 
+
+	if root.data == a:
+		present[0] = True
+		return root
+		
+
+	if root.data == b:
+		present[1] = True
+		return root
+
+
+	return lst if lst is not None else rst 
+
+
+def LCA(root, n1, n2):
+	present = [False, False]
+	lca = LCA_helper(root, n1, n2, present)
+	if present[0] and present[1] and lca:
+		return lca.data
+	return None
+
+
+root = buildBTRec()
+print()
+preorder(root)
+print()
+inorder(root)
+print()
+postorder(root)
+print()
+print(LCA(root, 8, 5))
 # print(countNodes(root))
 # print(height(root))
 # tilt(root)
@@ -230,11 +267,11 @@ def buildBTUsingPREIN(pre, ino):
 # print()
 # print(isBST(root))
 
-pre = [4,5,2,3,6,7,1]
-ino = [5,4,6,3,7,2,1]
+# pre = [4,5,2,3,6,7,1]
+# ino = [5,4,6,3,7,2,1]
 
-root1 = buildBTUsingPREIN(pre, ino)
-postorder(root1)
+# root1 = buildBTUsingPREIN(pre, ino)
+# postorder(root1)
 """
 1
 2
