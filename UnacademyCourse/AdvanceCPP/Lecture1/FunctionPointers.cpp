@@ -26,11 +26,11 @@ void for_each(vector<int> &v, void(*func)(int)) {
 int main()
 {
 	/* code */
-	// int x = 10;
-	// int *p = &x;
-	// // auto ptr = &hello;
-	// void(*ptr)() = hello;
-	// ptr();
+	int x = 10;
+	int *p = &x;
+	auto ptr = &hello;
+	// void(*ptsr)() = hello;
+	ptr();
 	// cout<<ptr<<endl;
 	// cout<<*ptr<<endl;
 

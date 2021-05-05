@@ -84,7 +84,7 @@ int main(int argc, char const *argv[]) {
 	}
 	BubbleSort(arr);
 	logarr(arr, 0, arr.size()-1);
-
+	auto it = arr.begin();
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
