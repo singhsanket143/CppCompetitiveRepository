@@ -53,39 +53,43 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
-	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
-}
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	const char str[20] = "sanket singh"; // 8 bits
+	cout<<str<<endl;
+
+
+	const wchar_t* wstr = L"sanket";// size will be compiler dependent
+	wcout<<wstr<<endl;
+	wstring strw = L"sanket";
+	wcout<<strw<<endl;
+
+
+	const char* multiline = R"(line1
+line2
+line3
+line4)"; // raw strings
+	cout<<multiline<<endl;
+
+	const char* multiline2 = "line1\n"
+	"line2\n"
+	"line3\n";
+	cout<<multiline2<<endl;
+
+	const char* s8 = u8"sanket"; // utf-8
+	const char16_t* str16 = u"Sanket"; // 16 bits // utf16
+	const char32_t* str32 = U"Sanket singh"; // 32 bits // utf-32
+	char16_t ch = u'S';
+	cout<<(char)ch<<endl;;
+	cout<<str16[0]<<endl;
+	cout<<str32<<endl;
+
+	using namespace std::string_literals;
+	string s1 = "sanket"s + "singh";
+
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

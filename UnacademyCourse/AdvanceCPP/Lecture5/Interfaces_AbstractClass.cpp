@@ -53,39 +53,64 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+class Printable {
+public:
+	virtual string fun() = 0;
+};
+
+class Entity {
+	// abstract class / interface
+public:
+	Entity() {}
+
+	// virtual void fun() {
+	// 	cout<<"fun";
+	// }
+
+	void gun() {
+		cout<<"gun";
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
+	virtual string getName() = 0; // pure virtual function
+	// a pure virtual function must be implemented in the subclass
+};
+
+
+class Player : public Entity, public Printable {
+private:
+	string name;
+public:
+	Player() {}
+	Player(const string& name) : name(name) {}
+
+	string getName() override {
+		return this->name;
 	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
+
+	string fun() override {
+		return "fun with"+name;
 	}
-	arr = output;
+};
+
+
+void Print(Printable* obj) {
+	cout<<obj->fun()<<endl;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+
+	// Entity *e = new Entity();
+	/*
+	if we have even one pure virtual function in class
+	it will become an abstract class and we cant init an
+	object of it
+	*/
+
+	Player *p = new Player("Sanket");
+	Print(p);
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

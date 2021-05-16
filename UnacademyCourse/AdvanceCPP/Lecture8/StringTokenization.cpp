@@ -31,7 +31,7 @@ using namespace std;
 #define logarr(arr,a,b)	for(int z=(a);z<=(b);z++) cout<<(arr[z])<<" ";cout<<endl;	
 template <typename T> T gcd(T a, T b){if(a%b) return gcd(b,a%b);return b;}
 template <typename T> T lcm(T a, T b){return (a*(b/gcd(a,b)));}
-vs tokenizer(string str,char ch) {std::istringstream var((str)); vs v; string t; while(getline((var), t, (ch))) {v.pb(t);} return v;}
+
 
 
 void err(istream_iterator<string> it) {}
@@ -53,40 +53,25 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
-	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
+
+vs tokenizer(string str,char ch) {
+	std::istringstream var(str); 
+	vs v; 
+	string t; // tokens
+	while(getline((var), t, ch)) {
+		v.pb(t);
+	} 
+	return v;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
+	vs arr = tokenizer("sanket, singh, unacademy", ',');
+	for(string &s: arr) {
+		cout<<s<<endl;
 	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
-
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

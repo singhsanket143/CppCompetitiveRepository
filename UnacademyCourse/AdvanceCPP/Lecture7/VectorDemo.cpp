@@ -53,39 +53,54 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+struct Vertex {
+	float x, y, z;
+	Vertex(float x1, float y1, float z1) {
+		x = x1;
+		y = y1;
+		z = z1;
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
-}
+};
+
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
+	vector<Vertex> v; // initialise a vector
+	log(v.size(), v.capacity());
+
+	for(int i = 0; i < 10; i++) {
+		Vertex v1(1.2,3.4,8.8);
+
+		v.push_back(v1); // insert the element at the last of the vector
+		log(v.size(), v.capacity());
 	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+
+	vector<int> v1(10); // this takes default size as 10
+	log(v1.size(), v1.capacity());
+	v1.push_back(11);
+	log(v1.size(), v1.capacity());
+
+	vector<int> v2(5, -1);
+	log(v2.size(), v2.capacity());
+
+	vector<int> v3 {10, 20, 30};
+	log(v3.size(), v3.capacity());
+
+	int arr[] = {1,2,3,4,5};
+	vector<int> v4(arr, arr+5);
+	log(v4.size(), v4.capacity());
+
+
+	// access elements of vectors just like arrays
+	cout<<v2[0]<<" "<<v2[1]<<" "<<v2[2]<<endl;
+
+
+	vector<int> v5(v4.begin(), v4.end());
+	cout<<(v5 == v4)<<endl;
+
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

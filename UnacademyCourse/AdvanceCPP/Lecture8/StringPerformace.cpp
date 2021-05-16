@@ -53,39 +53,56 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
-	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
+
+void* operator new(size_t size) {
+	cout<<"Called new"<<endl;
+	return malloc(size);
+}
+
+void PrintName(string &str) {
+	cout<<str<<endl;
+}
+
+void PrintName(string_view &s) {
+	cout<<s<<endl;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	// string name = "Unacademy is a platform to learn new things blah blah blah!!!...";
+	// PrintName(name);
+
+	// string name2 = "abcdefghijklmnopqrstuv";
+
+	string_view str = "Unacademy is a platform to learn new things blah blah blah!!!...";
+	// // string firstname = str.substr(0, 23);
+	// // string lastname = str.substr(7);
+
+	// string_view firstname(str.c_str(), 3);
+	// string_view lastname(str.c_str() + 2, 24);
+	
+	// PrintName(firstname);
+	// PrintName(lastname);
+	// PrintName(str);
+
+
+	string s = "Unacademy is a platform to learn new things blah blah blah!!!...";
+	// cout<<s<<endl;
+	// s.append("singh");
+	// s.append("sdfghjklkjhgfdsdfghjklkjhgfdsfghjk");
+	// cout<<s<<endl;
+	// s = s + "singh";
+	// cout<<s<<endl;
+
+	// s += "singh";
+	// cout<<s<<endl;
+
+	// s.push_back('x');
+	s.push_back('x');
+
+	// cout<<s<<endl;
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

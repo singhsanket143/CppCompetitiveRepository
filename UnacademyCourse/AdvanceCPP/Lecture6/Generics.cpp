@@ -53,39 +53,75 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+// int abs(int n) {
+// 	return (n < 0) ? -n : n;
+// }
+
+// float abs(float n) {
+// 	return (n < 0) ? -n : n;
+// }
+
+// function template
+template<class T>
+T abs_custom(T n) {
+	return (n < 0) ? -n : n;
+}
+
+class Person {
+public:
+	string name;
+	int age;
+	Person() {}
+	Person(string name, int age) {
+		this->name = name;
+		this->age = age;
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
+};
+
+template<class Type>
+class Stack {
+public:
+	Type st[10];
+	int top;
+	Stack() {
+		this->top = -1;
 	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
+	void push(Type var) {
+		this->st[++this->top] = var;
 	}
-	arr = output;
+	Type pop() {
+		return this->st[this->top--];
+	}
+
+	Type peek();
+};
+
+template<class Type>
+Type Stack<Type>::peek() {
+	return st[top];
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	int x = -10;
+	float f = -9.5f;
+	double d = 3.4;
+
+	cout<<abs_custom(x)<<" "<<abs_custom(f)<<" "<<abs_custom(d)<<endl;
+	Person p1("Sanket", 23);
+	Person p2("Santanu", 20);
+	Person p3("Jatin", 20);
+	Stack<Person> s1;
+	s1.push(p1);
+	s1.push(p2);
+	s1.push(p3);
+
+	cout<<s1.pop().name<<endl;
+	// cout<<s1.pop()<<endl;
+	cout<<s1.peek().name<<endl;
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

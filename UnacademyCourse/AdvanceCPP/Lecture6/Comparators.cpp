@@ -53,39 +53,78 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+struct Car {
+	int price;
+	int mileage;
+	string name;
+	string color;
+
+	bool operator <(const Car &c) const {
+		return price < c.price;
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
+};
+
+// class Car {
+// public:
+// 	int price;
+// 	int mileage;
+// 	string name;
+// 	string color;
+
+// 	bool operator <(const Car &c) const {
+// 		return price < c.price;
+// 	}
+// };
+
+bool cmp(const struct Car &c1, const struct Car &c2) {
+	if(c1.mileage == c2.mileage) {
+		return c1.price < c2.price;
 	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
+	return c1.mileage < c2.mileage;
+}
+
+void BubbleSort(vector<Car> &arr) {
+	int n = arr.size();
+	for(int i = 0; i < n-1; i++) {
+		bool is_sorted = false;
+		for(int j = 0; j < n - i - 1; j++) {
+			if(arr[j+1] < arr[j]) { // we always check adjacent elements
+				swap(arr[j], arr[j+1]);
+				is_sorted = true;
+			}
+		}
+		if(not is_sorted) {
+			break;
+		}
 	}
-	arr = output;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
 	int n;
 	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
+	Car arr[n];
+	// vector<Car> arr(n);
+	for(int i = 0; i < n; i++) {
+		cin>>arr[i].price>>arr[i].mileage>>arr[i].name>>arr[i].color;
 	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+
+	int a[] = {5,4,3,2,1};
+	sort(a, a+5);
+	for(int i = 0; i < 5; i++) {
+		cout<<a[i]<<" ";
+	}
+	cout<<endl;
+	sort(arr, arr+n);
+	// sort(arr, arr+n, [](Car c1, Car c2) {return c1.price < c2.price;});
+	// BubbleSort(arr);
+	for(int i = 0; i < n; i++) {
+		cout<<arr[i].price<<" "<<arr[i].mileage<<" "<<arr[i].name<<" "<<arr[i].color<<endl;
+	}
+	// cout<<(arr[0] < arr[1]);
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

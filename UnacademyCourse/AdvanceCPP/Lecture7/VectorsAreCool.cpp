@@ -53,39 +53,82 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
-	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
-}
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
+	vector<int> v;
+	for(int i = 0; i < 5; i++) {
+		v.emplace_back(i);
 	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	cout<<v[2]<<endl; // never throws runtime exception, behaviour can be undefined here
+	cout<<v.at(3)<<endl; // throws exception
+	cout<<v.front()<<" "<<v.back()<<endl;
+	cout<<v.size()<<" "<<v.capacity()<<" "<<v.max_size()<<endl;
+
+
+	for(int e : v) {
+		cout<<e<<" ";
+	}
+	cout<<endl;
+	for(auto e : v) {
+		cout<<e<<" ";
+	}
+	cout<<endl;
+	cout<<v.empty()<<endl;
+	// v.clear();
+	cout<<v.size()<<" "<<v.capacity()<<endl;
+	v[0] = 10;
+	vector<int>::iterator it = v.begin();
+	cout<<*it<<endl;
+	it = v.end();
+	cout<<*it<<endl;
+
+	for(it = v.begin(); it != v.end(); it++) {
+		cout<<*it<<" ";
+	}
+	cout<<*(v.end() - 1)<<endl;
+
+	// erase expects an iterator
+	v.erase(v.begin() + 2); // erase elements from between the vector
+	for(it = v.begin(); it != v.end(); it++) {
+		cout<<*it<<" ";
+	}
+	cout<<endl;
+
+	// range delete [first, last)
+	v.erase(v.begin(), v.begin()+2); // erase elements from between the vector
+	for(it = v.begin(); it != v.end(); it++) {
+		cout<<*it<<" ";
+	}
+
+	v.pop_back(); // removes the ;ast element in O(1)
+
+
+	vector<int> v1 {1,2,3,41,5};
+	vector<int> v2 {1,2,3,4,5};
+
+	cout<<(v1 == v2)<<endl; // compare vectors
+	vector<int> v3(5, 1);
+	cout<<(v3 == vector<int> (5, 1))<<endl;
+
+	auto i = v3.insert(v3.begin()+1, 2); // insert function takes an iterator for position and the element and performs insertion in between, and also returns the iterator to the inserted position
+	cout<<*i<<endl;
+	for(it = v3.begin(); it != v3.end(); it++) {
+		cout<<*it<<" ";
+	}
+	cout<<endl;
+	sort(v3.begin(), v3.end());
+	for(it = v3.begin(); it != v3.end(); it++) {
+		cout<<*it<<" ";
+	}
+	// cout<<i<<endl;
+
+	int x = 10;
+	int *ptr = &x;
+	cout<<ptr<<endl;
+
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

@@ -53,40 +53,45 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+// diamond problem
+
+class Parent {
+protected:
+	int x = 10;
+
+	int getX() {
+		return x;
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
+};
+
+class child1 : virtual public Parent {
+protected:
+	// int getX() {
+	// 	return 11;
+	// }
+};
+
+class child2 : virtual public Parent {
+protected:
+	// int getX() {
+	// 	return 12;
+	// }
+};
+
+class grandChild : public child1, public child2 {
+public:
+	int get() {
+		return getX();
 	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
-}
+};
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
-
+	grandChild g;
+	cout<<g.get()<<endl;
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

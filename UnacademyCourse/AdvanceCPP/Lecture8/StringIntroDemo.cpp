@@ -53,40 +53,44 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
-	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
+
+void PrintString(string str) {
+	// this creates a copy
+	cout<<str<<endl;
+}
+
+void PrintName(string &str) {
+	// no copies only reference
+	cout<<str<<endl;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	char s1[] = "Sanket";
+	const char* s2 = "Sanket Singh";
+	cout<<s1<<endl;
+	cout<<s2<<endl;
+	cout<<sizeof(s1)<<endl;
+	cout<<sizeof(s2)<<endl;
+	s1[1] = 'q';
+	s2 = "singh";
+	// s2[2] = 'w'; // will not work
+	cout<<"S1 is "<<s1<<endl;
+	char s3[10] = {'S', 'a', 0, 'k', 'e', 't'};
+	cout<<s3<<endl;
 
+	string str = "Sanket";
+	cout<<str<<endl;
+	str[0] = 'q';
+	
+	log(str[0], str[1], str, str.size());
+
+	// string str_x = "sanket" + "singh"; // wont work
+	string str2 = string("sanket") + "singh";
+	string str3 = "sanket";
+	str3 += "singh";
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

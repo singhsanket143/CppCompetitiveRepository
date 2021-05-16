@@ -1,0 +1,6 @@
+Base destructor
+Derive's destructor
+Base destructor
+
+
+Executed In: 0.2 ms

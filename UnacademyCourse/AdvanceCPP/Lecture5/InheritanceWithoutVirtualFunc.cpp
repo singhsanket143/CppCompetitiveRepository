@@ -53,40 +53,60 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+class Entity {
+public:
+	string getName() {
+		return "Entity";
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
+};
+
+class Player : public Entity {
+private:
+	string name;
+public:
+	Player(const string& name) : name(name) {}
+
+	string getName() {
+		return this->name;
 	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
+};
+
+void PrintName(Entity* e) {
+	cout<<e->getName()<<endl;
+}
+
+void PrintName(Player *p) {
+	cout<<p->getName()<<endl;
 }
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
-	int n;
-	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
-	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	// this will create in heap
+	Entity *e = new Entity(); // entity pointer pointing to entity obj
+	cout<<e->getName()<<endl;
 
+	Player *p = new Player("Sanket");// player pointer pointing to player obj
+	cout<<p->getName()<<endl;
+
+	Entity *e2 = p; // yes a valid statement
+	// entity pointer pointing to player object
+	cout<<e2->getName()<<endl;
+	/*
+	the problem is even though we have e2 as entity pointer
+	but it points to an object of player which has separate
+	implementation of getname
+	*/
+	cout<<"***"<<endl;
+	PrintName(e);
+	PrintName(p);
+	PrintName(e2);
+
+	// So with this implementation LHS will win and call its function always
+
+	// Player *p2 = e; cant do this
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

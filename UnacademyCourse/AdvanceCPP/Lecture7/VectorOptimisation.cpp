@@ -53,39 +53,53 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
-// for all positive
-void countingsort(vector<int> &arr) {
-	int val = *max_element(all(arr));
-	vector<int> freq(val+1, 0);
-	for(int &el: arr) {
-		freq[el]++;
+
+struct Vertex {
+	float x, y, z;
+	Vertex() {}
+	Vertex(float x, float y, float z)
+	: x(x), y(y), z(z) {
 	}
-	// prefix
-	for(int i = 1; i <= val; i++) {
-		freq[i] += freq[i-1];
-	}
-	vector<int> output(arr.size());
-	for(int i = arr.size() - 1; i >= 0; i--) {
-		output[freq[arr[i]] - 1] = arr[i];
-		freq[arr[i]]--;
-	}
-	arr = output;
-}
+
+	Vertex(const Vertex &v)
+	: x(v.x), y(v.y), z(v.z) {
+		cout<<"Copied!"<<endl;
+	} // copy constructor
+};
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-	vector<int> arr;
+	vector<Vertex> v;
 	int n;
 	cin>>n;
-	while(n--) {
-		int x;
-		cin>>x;
-		arr.push_back(x);
+	v.reserve(n);
+	log(v.size(), v.capacity());
+	v.emplace_back(1,2,3);
+	v.emplace_back(4,5,6);
+	v.emplace_back(7,8,9);
+	// v.push_back({1,2,3});
+	// v.push_back({4,5,6});
+	// v.push_back({7,8,9});
+	// cout<<v[0].x<<" "<<v[0].y<<" "<<v[0].z<<endl;
+
+	for(int i = 0; i < n; i++) {
+		cout<<v[i].x<<" "<<v[i].y<<" "<<v[i].z<<endl;
 	}
-	countingsort(arr);
-	logarr(arr, 0, arr.size()-1);
+	// paremeter on right side of : will be container name
+	// parameter on the left size : element from the container and its type
+	for(Vertex el : v) { // by copy
+		cout<<el.x<<" "<<el.y<<" "<<el.z<<endl;
+	}
+	for(Vertex &el : v) { // by reference
+		cout<<el.x<<" "<<el.y<<" "<<el.z<<endl;
+	}
+	for(auto &el : v) {
+		cout<<el.x<<" "<<el.y<<" "<<el.z<<endl;
+	}
+	v.insert(v.begin()+1, {1,2,3});
+
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
