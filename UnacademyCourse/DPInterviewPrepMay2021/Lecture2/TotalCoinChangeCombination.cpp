@@ -58,12 +58,19 @@ int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-
-	deque<int> first;
-	first.push_back(10);
-	first.push_front(19);
-	
-
+	ll n, x;
+	cin>>n>>x;
+	vi coin(n);
+	loop(i, 0, n-1) cin>>coin[i]; // sorted fashion
+	vi dp(x+1, 0);
+	dp[0] = 1;
+	loop(j, 0, n-1) { // looping on coins
+		loop(i, 1, x) {
+			if(coin[j] > i) continue;
+			dp[i] = dp[i] + dp[i - coin[j]];
+		}
+	}
+	cout<<dp[i];
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

@@ -54,15 +54,28 @@ void file_i_o()
 	#endif
 }
 
+class A {
+public:
+	void canGoWrong() {
+		int *arr = new int[999999999999999];
+		delete [] arr;
+	}
+};
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
 
-	deque<int> first;
-	first.push_back(10);
-	first.push_front(19);
-	
+	A a;
+	try {
+		a.canGoWrong();
+	} catch(bad_alloc &c) {
+		//
+	} catch(exception &e) {
+		cout<<e.what()<<endl;
+	}
+	cout<<"Continued\n";
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://www.codechef.com/UADPIP01/problems/BLJUMP
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -58,11 +58,25 @@ int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
-
-	deque<int> first;
-	first.push_back(10);
-	first.push_front(19);
-	
+	int t;
+	cin>>t;
+	while(t--) {
+		ll n, k;
+		cin>>n>>k;
+		vi h(n);
+		loop(i, 0, n-1) cin>>h[i];
+		vi dp(n, inf);
+		// dp[i] -> min cost to reach from 0-i
+		dp[0] = 0;
+		loop(i, 1, n-1) {
+			loop(j, 1, k) {
+				if(i - j < 0) break;
+				dp[i] = min(dp[i], dp[i-j]+abs(h[i]-h[i-j]));
+			}
+		}
+		// logarr(dp, 0, n-1);
+		cout<<dp[n-1]<<endl;
+	}
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

@@ -54,16 +54,37 @@ void file_i_o()
 	#endif
 }
 
+vi getDigits(int n) {
+	vi v;
+	while(n) {
+		if(n%10 != 0) {
+			v.pb(n%10);
+		}
+		n /= 10;
+	}
+	return v;
+}
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
 
-	deque<int> first;
-	first.push_back(10);
-	first.push_front(19);
-	
-
+	ll n;
+	cin>>n;
+	if(n <= 9) {
+		cout<<1;
+		return 0;
+	}
+	vi dp(n+1, inf);
+	loop(i, 1, 9) dp[i] = 1;
+	loop(i, 10, n) {
+		vi digits = getDigits(i);
+		for(auto j : digits) {
+			dp[i] = min(dp[i], 1 + dp[i - j]);
+		}
+	}
+	cout<<dp[n];
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

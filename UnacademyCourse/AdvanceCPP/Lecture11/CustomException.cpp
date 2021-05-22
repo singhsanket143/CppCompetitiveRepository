@@ -54,16 +54,75 @@ void file_i_o()
 	#endif
 }
 
+class Stack {
+private:
+	int top;
+	int st[10];
+public:
+	class Range {
+	public:
+		const char* reason;
+		int err;
+		Range(const char* reason, int err) {
+			this->reason = reason;
+			this->err = err;
+		}
+		void what() {
+			cout<<this->reason<<" "<<this->err<<endl;
+		}
+	};
+	class EmptyRange : public exception {
+	public:
+		virtual const char * what() const noexcept {
+			return "Derived from exception";
+		}
+	};
+	Stack() {
+		top = -1;
+	}
+	void push(int x) {
+		if(top >= 9) {
+			throw "Overflow";
+		}
+		st[++top] = x;
+	}
+	int pop() {
+		if(top < 0) {
+			// throw Range("underflow", 500);
+			throw EmptyRange();
+		}
+		return st[top--];
+	}
+};
+
+int divide(int x, int y) {
+	if(y <= 0) throw "Zero division not supported";
+	int c = x / y;
+}
+
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
-	// Write your code here....
-
-	deque<int> first;
-	first.push_back(10);
-	first.push_front(19);
-	
-
+	// Write your code here....stack st;
+	// Stack s;
+	// try {
+	// 	s.pop();
+	// } catch(const char* &ex) {
+	// 	cout<<ex<<endl;
+	// } catch(Stack::EmptyRange &r) {
+	// 	cout<<r.what();
+	// } 
+	// // cout<<divide(6, 0);
+	int x;
+	cin>>x;
+	try {
+		if(x <= 0) throw "zero exception";
+		int c = 6 / x;
+		// return c;
+	} catch(...) {
+		// throw "Zero division error";
+		cout<<"zero devision error happened";
+	}
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
