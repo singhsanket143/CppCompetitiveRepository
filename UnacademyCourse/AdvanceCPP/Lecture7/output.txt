@@ -1,38 +1,24 @@
 v.size() = 0
-v.capacity() = 0
-v.size() = 1
-v.capacity() = 1
-v.size() = 2
-v.capacity() = 2
-v.size() = 3
-v.capacity() = 4
-v.size() = 4
-v.capacity() = 4
-v.size() = 5
-v.capacity() = 8
-v.size() = 6
-v.capacity() = 8
-v.size() = 7
-v.capacity() = 8
-v.size() = 8
-v.capacity() = 8
-v.size() = 9
-v.capacity() = 16
-v.size() = 10
-v.capacity() = 16
-v1.size() = 10
-v1.capacity() = 10
-v1.size() = 11
-v1.capacity() = 20
-v2.size() = 5
-v2.capacity() = 5
-v3.size() = 3
-v3.capacity() = 3
-v4.size() = 5
-v4.capacity() = 5
--1 -1 -1
-1
-Sanket
+v.capacity() = 3
+1 2 3
+4 5 6
+7 8 9
+Copied!
+1 2 3
+Copied!
+4 5 6
+Copied!
+7 8 9
+1 2 3
+4 5 6
+7 8 9
+1 2 3
+4 5 6
+7 8 9
+Copied!
+Copied!
+Copied!
+Copied!
 
 
-Executed In: 0.441 ms
+Executed In: 0.44 ms

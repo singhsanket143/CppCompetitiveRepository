@@ -1,0 +1,12 @@
+
+--- push_back ---
+Create class
+Move Constructor Called
+Destroy class
+
+--- emplace_back ---
+Create class
+
+--- Finish ---
+Destroy class
+Destroy class
