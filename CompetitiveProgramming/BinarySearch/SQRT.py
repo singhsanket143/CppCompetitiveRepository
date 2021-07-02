@@ -1,4 +1,5 @@
-def sqrt(n):
+def sqrt(n, precision = 3):
+    # O(logn + precision)
     if n == 0 or n == 1:
         return n 
     
@@ -14,8 +15,15 @@ def sqrt(n):
             hi = mid - 1
             ans = hi
 
+    ans = float(ans)
+    inc = 0.1 
+    for i in range(0, precision):
+        while(ans*ans <= n):
+            ans += inc
+        ans = ans - inc
+        inc = inc/10
     return ans 
 
 
 n = int(input())
-print(sqrt(n))
+print(round(sqrt(n), 4))
