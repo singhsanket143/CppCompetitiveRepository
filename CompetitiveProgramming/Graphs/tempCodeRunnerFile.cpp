@@ -1,3 +1,1 @@
-
-            int u, v;
-            std::cin>>u>>v;
+std::cout<<neighbour<<"\n";

@@ -1,13 +1,3 @@
-NO
-YES
-NO
-NO
-NO
-NO
-NO
-NO
-NO
-YES
+No
 
-
-Executed In: 4.338 ms
+Executed In: 0.169 ms
