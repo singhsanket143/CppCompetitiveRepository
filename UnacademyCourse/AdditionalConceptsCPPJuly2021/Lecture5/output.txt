@@ -1,0 +1,6 @@
+Timer constructor 1 called
+Counter constructor 1 called
+Stopwatch constructor called
+
+
+Executed In: 0.192 ms
