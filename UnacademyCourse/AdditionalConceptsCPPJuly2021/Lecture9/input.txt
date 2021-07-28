@@ -1,0 +1,6 @@
+5
+iphone applephone 100000
+macbook applelaptop 150000
+s10 samsungphone 50000
+ipad appleipad 50000
+ipencil applepencil 10000
