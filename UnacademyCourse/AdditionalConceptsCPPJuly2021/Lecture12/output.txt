@@ -1,0 +1,3 @@
+Exception of empty range
+
+Executed In: 0.344 ms

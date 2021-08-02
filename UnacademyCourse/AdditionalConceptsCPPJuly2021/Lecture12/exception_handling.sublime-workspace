@@ -1,0 +1,663 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"print",
+				"printName1"
+			],
+			[
+				"prim",
+				"primes"
+			],
+			[
+				"fr",
+				"freq"
+			],
+			[
+				"adj",
+				"adjlist"
+			],
+			[
+				"find",
+				"findLongestPath"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"ans",
+				"ans_r"
+			],
+			[
+				"ma",
+				"mailContent"
+			],
+			[
+				"mai",
+				"mailer"
+			],
+			[
+				"sess",
+				"sessionData"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"slo",
+				"slotData"
+			],
+			[
+				"mail",
+				"mailData"
+			],
+			[
+				"sen",
+				"sendmail"
+			],
+			[
+				"dis",
+				"district"
+			],
+			[
+				"get",
+				"getVaccineSlots"
+			],
+			[
+				"dist",
+				"district"
+			],
+			[
+				"resp",
+				"responseData"
+			],
+			[
+				"INT",
+				"INT_MAX"
+			],
+			[
+				"nex",
+				"nextcell"
+			],
+			[
+				"ne",
+				"nextrow"
+			],
+			[
+				"se",
+				"second"
+			],
+			[
+				"perm",
+				"permcount"
+			],
+			[
+				"is",
+				"isMatching"
+			],
+			[
+				"lis",
+				"lisOP"
+			],
+			[
+				"unor",
+				"unordered_set\tstandard header (since c++11)"
+			],
+			[
+				"hash",
+				"hash_pair"
+			],
+			[
+				"pri",
+				"priority_queue"
+			],
+			[
+				"fib",
+				"fibDPBU"
+			],
+			[
+				"max",
+				"maxArea"
+			],
+			[
+				"end",
+				"endl"
+			],
+			[
+				"pa",
+				"parseInt"
+			],
+			[
+				"la",
+				"latest_updates"
+			],
+			[
+				"late",
+				"latest_updates"
+			],
+			[
+				"upd",
+				"updateLatest"
+			],
+			[
+				"par",
+				"parseInt"
+			],
+			[
+				"price",
+				"priceToCount"
+			],
+			[
+				"pars",
+				"parseInt"
+			],
+			[
+				"round",
+				"roundAfterSubtract"
+			],
+			[
+				"ord",
+				"order_id"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"proce",
+				"processDeletedOrder"
+			],
+			[
+				"cre",
+				"create_update"
+			],
+			[
+				"upda",
+				"updateExistingOrder"
+			],
+			[
+				"retry",
+				"retry_wait"
+			],
+			[
+				"ret",
+				"retry_wait"
+			],
+			[
+				"err",
+				"error_message"
+			],
+			[
+				"token",
+				"tokenizer"
+			],
+			[
+				"string",
+				"string_view"
+			],
+			[
+				"abs",
+				"abs_custom"
+			],
+			[
+				"pr",
+				"price"
+			],
+			[
+				"ge",
+				"getX"
+			],
+			[
+				"ch",
+				"child2"
+			],
+			[
+				"Prin",
+				"Printable"
+			],
+			[
+				"prin",
+				"Printable"
+			],
+			[
+				"cons",
+				"constructor"
+			],
+			[
+				"Pro",
+				"ProtectedInherit"
+			],
+			[
+				"pub",
+				"public"
+			],
+			[
+				"Coun",
+				"CountDn"
+			],
+			[
+				"ty",
+				"typej"
+			],
+			[
+				"di",
+				"diplay"
+			],
+			[
+				"Con",
+				"ComplexNumber"
+			],
+			[
+				"log",
+				"logarr"
+			],
+			[
+				"pi",
+				"pivot_index"
+			],
+			[
+				"ran",
+				"randomPivotAlgo"
+			],
+			[
+				"d",
+				"display"
+			],
+			[
+				"updat",
+				"updateCost"
+			],
+			[
+				"hea",
+				"heapSize"
+			],
+			[
+				"down",
+				"downheapifyHeapsortHelper"
+			],
+			[
+				"heap",
+				"downheapifyHeapsortHelper"
+			],
+			[
+				"ios",
+				"iostream\tstandard header"
+			],
+			[
+				"en",
+				"endl"
+			],
+			[
+				"pop",
+				"pop_heap"
+			],
+			[
+				"pus",
+				"push_heap"
+			],
+			[
+				"L",
+				"LCA"
+			],
+			[
+				"LCA",
+				"LCA_helper"
+			],
+			[
+				"cur",
+				"curr_xor"
+			],
+			[
+				"child",
+				"children"
+			],
+			[
+				"chi",
+				"children"
+			],
+			[
+				"unordered",
+				"unordered_map\tstandard header (since c++11)"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"level",
+				"Levels: Off"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"levels",
+				"Levels: Off"
+			],
+			[
+				"leve",
+				"Levels: Off"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/sanketsingh/Downloads/digging-into-node/solutions/ex1.js",
+		"/Users/sanketsingh/Documents/DevZone/NodeCourse/Lecture1/Modules/app.js",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/NumberTheoryBasic/Hardest_GCD_Problem.cpp",
+		"/Users/sanketsingh/Documents/exportsdemo/calci.js",
+		"/Users/sanketsingh/Documents/exportsdemo/package.json",
+		"/Users/sanketsingh/Documents/exportsdemo/index.html",
+		"/Users/sanketsingh/Documents/exportsdemo/add.mjs",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture5/BeautifulFactorialGame.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture5/primedivisibility.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture13/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture13/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture13/ArtihmeticSlices2.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture13/KnightProbability.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture9/BadLuckIsland.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture4/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture4/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture4/fiblogn.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/tsp.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/JonSnowAndHisFavouriteNumber.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/royandcoingbox.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture12/untitled",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture3/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture3/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture3/CanUHandleWeights.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture11/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture11/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture11/xorcicuit.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture11/AlyonaAndStrings.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture2/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture2/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture2/divisoroffactorial.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture2/primesieve.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture2/segmentedsieve.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture10/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture10/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture10/famtree.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture10/longestpath.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture10/vertexcover.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture1/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture1/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture1/Euclid.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture1/extendedeuclidalgo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2021/Lecture1/modularexponent.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2020/Lecture1/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2020/Lecture1/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/MathsForIPMay2020/Lecture1/Euclid.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture9/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture9/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture9/TouristSpoj.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/BasicDSA/BinaryHeap.py",
+		"/Users/sanketsingh/Documents/DevZone/NodeVaccine/index.js",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/DynamicProgramming/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/DynamicProgramming/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/DynamicProgramming/Tourist.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/DynamicProgramming/buyandsellstocks.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture8/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture8/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture8/ChefCollectCoins_BurstBallon.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture15/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture15/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture15/GoodPairs.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture15/BattleWithWhoYouKNow.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgrammingTemplate.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/input.txt",
+		"/Users/sanketsingh/Documents/DevZone/NodeVaccine/.gitignore",
+		"/Users/sanketsingh/Documents/DevZone/NodeVaccine/.env",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/OptimalGameStrategy.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/Knapsack2.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/UnboundedKnapsack.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture7/DungeonGame.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/AtcoderDPContest/U.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture6/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture6/output.txt",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/config/Lecture7",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/config/routes.rb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/app/views/home/index.html.erb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/config/environments/development.rb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/.gitignore",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/app/views/layouts/application.html.erb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/app/controllers/home_controller.rb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/app/models/user.rb",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/Gemfile",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/config/credentials.yml.enc",
+		"/Users/sanketsingh/Documents/DevZone/VaccineScheduler/config/master.key",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture6/mcm.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture13/AstronmicalDB.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture13/PBDSdemo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture13/InversionCount.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/random_walk.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/algorithms_demo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/STL_BS_Demo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture14/ABCDEF.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture5/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture5/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture5/WildCardPatternMatching.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/STL/Average_Length.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/STL/Random_Walk.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture4/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture4/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture4/editDistance.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture4/LIS.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/CompetitiveProgramming/AtcoderDPContest/C.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture4/MaxHapiness.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyFreeLiveClass/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyFreeLiveClass/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyFreeLiveClass/GNYR09F.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture12/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture12/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture12/Demo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture12/BitsetDemo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture12/CLA.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture3/input.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture7/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture3/output.txt",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture7/VectorOptimisation.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture3/test.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/DPInterviewPrepMay2021/Lecture3/CountGridPath.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/multimapdemo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/set_and_unordered_set.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/MapsDemo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/unordered_map_demo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/Demo.cpp",
+		"/Users/sanketsingh/Documents/CppCompetitiveRepository/UnacademyCourse/AdvanceCPP/Lecture11/CustomException.cpp"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 50.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 38.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "exception_handling.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"routes",
+				"VaccineScheduler/config/routes.rb"
+			],
+			[
+				"config/environments/development.rb",
+				"VaccineScheduler/config/environments/development.rb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 158.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}

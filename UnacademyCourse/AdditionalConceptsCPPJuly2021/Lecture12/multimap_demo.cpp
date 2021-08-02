@@ -48,59 +48,24 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
-
-
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
-}
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
-    // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
-
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
-
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
-
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
-
-    s.push_back('x');
-
-    s.append("o");
-
-
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
-
+    // Write your code here...
+    std::multimap<char, int> m1;
+    m1.insert({'a', 2});
+    m1.insert({'b', 55});
+    m1.insert({'b', 2});
+    m1.insert(std::make_pair('d', 9));
+    for(auto &p : m1) {
+        std::cout<<p.first<<" "<<p.second<<"\n";
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://www.spoj.com/problems/NFACTOR/
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -48,59 +48,43 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
+#define MAX 1000005
+std::vector<int> prime(MAX, 0);
+std::vector<std::vector<ll> > dp(11, std::vector<ll> (1000005, 0));
+void gen() {
+    for(ll i = 2; i <= 1000000;i ++) {
+        if(not prime[i]) {
+            for(ll j = i; j <= 1000000; j+= i) {
+                prime[j]++;
+            }
+        }
+    }
 
-
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
+    loop(i, 0, 10) {
+        loop(j, 1, 1000000) {
+            dp[i][j] = dp[i][j-1] + (prime[j] == i);
+        }
+    }
 }
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
 
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
-
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
-
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
-
-    s.push_back('x');
-
-    s.append("o");
-
-
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
-
+    gen();
+    ll t;
+    std::cin>>t;
+    while(t--) {
+        ll a, b, n;
+        std::cin>>a>>b>>n;
+        std::cout<<(dp[n][b] - dp[n][a-1])<<"\n";
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

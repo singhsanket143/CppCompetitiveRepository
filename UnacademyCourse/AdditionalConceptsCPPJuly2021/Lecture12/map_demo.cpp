@@ -48,59 +48,38 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
-
-
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
-}
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
 
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
+    std::map<char, int> m1;
 
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
+    m1['a'] = 1;
+    m1.insert({'b', 2});
+    m1.insert(std::make_pair('c', 3));
+    m1['b'] = 0;
 
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
+    for(std::pair<const char, int> &p : m1) {
+        std::cout<<p.first<<" "<<p.second<<"\n";
+    }
 
-    s.push_back('x');
+    auto lb = m1.lower_bound('b');
+    std::cout<<lb->second<<"\n";
 
-    s.append("o");
+    if(m1.find('c') != m1.end()) {
+        std::cout<<"Present\n";
+    } else {
+        std::cout<<"Absent\n";
+    }
 
-
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
-
+    std::map< std::pair<int, int> , int> m2;
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

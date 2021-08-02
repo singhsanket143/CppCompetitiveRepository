@@ -48,59 +48,74 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
 
 
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
-}
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
+struct hash_pair {
+    template<class T1, class T2>
+    size_t operator () (const std::pair<T1, T2> &p) const {
+        auto h1 = std::hash<T1>()(p.first);
+        auto h2 = std::hash<T2>()(p.second);
+        return ((h1^h2)*(h1+h2))%mod;
+    }
+};
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
 
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
+    std::unordered_map<char, int> m1;
+    m1.insert({'a', 1});
+    m1['b'] = 2;
+    m1.insert(std::make_pair('c', 3));
+    for(auto &p: m1) {
+        std::cout<<p.first<<" "<<p.second<<"\n";
+    }
 
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
+    std::unordered_map<int, int> m2 ({{3,4}, {2,3}, {0, 9}});
+    for(auto &p: m2) {
+        std::cout<<p.first<<" "<<p.second<<"\n";
+    }
 
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
+    std::unordered_map<std::pair<int, int>, int, hash_pair > m3;
+    std::unordered_map<std::string, int > m4;
+    std::unordered_map<std::string, int >::iterator it;
+    std::pair<std::pair<int, int> , int> p1;
 
-    s.push_back('x');
+    if(m2.count(12)) {
+        std::cout<<"present\n";
+    } else {
+        std::cout<<"Absent\n";
+    }
 
-    s.append("o");
+    if(m2.find(12) != m2.end()) {
+        std::cout<<"Present\n";
+    } else {
+        std::cout<<"Absent\n";
+    }
 
+    for(auto &p : m2) {
+        if(p.first < 1) {
+            m2.erase(p.first);
+        }
+    }
 
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
+    for(auto i = m2.begin(); i != m2.end(); i++) {
+        if(i->second == 3) {
+            m2.erase(i);
+        }
+    }
 
+    for(auto &p: m2) {
+        std::cout<<p.first<<" "<<p.second<<"\n";
+    }
+
+    m2.emplace(4,5);
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

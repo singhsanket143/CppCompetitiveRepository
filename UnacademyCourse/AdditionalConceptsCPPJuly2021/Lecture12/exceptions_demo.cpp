@@ -1,6 +1,7 @@
 // Problem Link - 
 /* By Sanket Singh */
 #include<bits/stdc++.h>
+#include<stdexcept>
 //#include<ext/pb_ds/assoc_container.hpp>
 //#include<ext/pb_ds/tree_policy.hpp>
 //#include <ext/pb_ds/trie_policy.hpp>
@@ -48,59 +49,56 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
 
+class Stack {
+private:
+	int top;
+	int st[10];
+public:
 
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
-}
+    class EmptyRange {
 
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
+    };
+	Stack() {
+		top = -1;
+	}
+	void push(int x) {
+		if(top >= 9) {
+			throw "Sanket";
+		}
+		st[++top] = x;
+	}
+	int pop() {
+		if(top < 0) {
+			// throw Range("underflow", 500);
+            std::string s = "23";
+			// throw EmptyRange();
+            throw std::runtime_error("Error");
+		}
+		return st[top--];
+	}
+};
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
-
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
-
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
-
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
-
-    s.push_back('x');
-
-    s.append("o");
-
-
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
-
+    try {
+        Stack st;
+        st.pop();
+    } catch(std::string &ex) {
+        std::cout<<"handled"<<" "<<ex<<"\n";
+    } catch(std::exception &e) {
+        std::cout<<e.what();
+    } catch(Stack::EmptyRange &r) {
+        std::cout<<"Exception of empty range";
+    }
+    
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

@@ -48,58 +48,65 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
+// volatile sig_atomic_t gSignalStatus;
+// void signal_handler(int signal)
+// {
+//   gSignalStatus = signal;
+// }
 
 
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
+int div_(int x, int y) {
+    try {
+        x = x/y;
+        return x;
+    } catch(std::exception &e) {
+        std::cout<<"Zero div error\n";
+    }
+    return -1;
 }
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
 
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
-
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
-
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
-
-    s.push_back('x');
-
-    s.append("o");
+    try {
+        std::vector<int> a(3);
+        std::cout<<a.at(5);
+    } catch(...) {
+        std::cout<<"Something went wrong\n";
+    }
+    
+    std::cout<<"bye";
+    // int *arr = new int[99999999999999999];
+    // signal(SIGFPE, signal_handler);
+    
+    // // std::cout<<y<<"\n";
+    
+    // printf("SignalValue: %d\n", gSignalStatus);
+    // printf("Sending signal: %d\n", SIGFPE);
+    // int x, z;
+    // std::cin>>x>>z;
+    // int y = x/z;
+    // printf("SignalValue: %d\n", gSignalStatus);
 
 
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
+        // int x;
+        // std::cin>>x;
+        // try {
+        //     int c = 6/x;
+        
+        // } catch(...) {
+        //     std::cout<<"Zero devision error";
+        // }
+        int a, b;
+        std::cin>>a>>b;
+        std::cout<<(a/b);
 
 
     #ifndef ONLINE_JUDGE 

@@ -48,59 +48,48 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    // #ifndef ONLINE_JUDGE
-    //     freopen("input.txt", "r", stdin);
-    //     freopen("output.txt", "w", stdout);
-    // #endif
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
-
-
-void* operator new(std::size_t size) {
-    std::cout<<"Called New"<<size<<"\n";
-    return malloc(size);
-}
-
-void printName1(std::string name) {
-    std::cout<<name<<"\n";
-}
-
-void printName2(std::string &name) {
-    std::cout<<name<<"\n";
-}
-
-
+const int MAX = 1000000;
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    // std::string s1 = "Sanket"; // sso short string optimsation
-    // std::string s2 = "Unacademy is a platform to learn blah blah blah !!!";
-    // printName2(s1);
-    // std::string s3 = "abcdefghijklmnopqrstuv";
-
-    // std::string s = "abcdefghijklmnopqestuvwxyz";
-    // s = s + "o"; // it always creates a new string
-    // s += "o"; // it appends the string in the original string only
-
-    // printName1(s2);
-    // s += "sanket singh blah blah blah";
-
-    std::string s = "abcdefghijklmnopqestuvwxyz";
-    // for(int i=0; i < 10; i++) {
-    //     s += "q";
-    //     log(s);
-    // }
-    s += "q";
-    s += "q";s += "q";s += "q";s += "q";s += "q";s += "q";
-
-    s.push_back('x');
-
-    s.append("o");
-
-
-    std::string str = "Unacademy is a platform to learn blah blah blah !!!";
-    log(str.substr())
-
+    int t;
+    std::cin>>t;
+    while(t--) {
+        int n;
+        std::cin>>n;
+        ump<int, bool> m;
+        std::vector<int> freq(MAX, 0);
+        std::vector<int> arr(n);
+        loop(i, 0, n-1) {
+            std::cin>>arr[i];
+            freq[arr[i]] = 1;
+            m[arr[i]] = true;
+        }
+        for(int i = 1; i <= 1000000; i++) {
+            if(m.count(i)) {
+                for(ll j = i*2; j <= 1000000; j += i) {
+                    freq[j] = (freq[j] + freq[i])%mod;
+                }
+            }
+        }
+        ll result = 0;
+        for(int i = 1; i <= 1000000; i++) {
+            if(m.count(i)) {
+                result = (result + freq[i])%mod;
+            }
+        }
+        if(m.count(0)) {
+            result *= 2;
+            result++;
+        }
+        std::cout<<result<<"\n";
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
