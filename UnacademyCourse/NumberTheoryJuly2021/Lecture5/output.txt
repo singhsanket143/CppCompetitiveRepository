@@ -1,0 +1,4 @@
+gcd_(45 = 9
+
+
+Executed In: 0.24 ms

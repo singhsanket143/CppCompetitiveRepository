@@ -1,0 +1,6 @@
+Shape constructor
+square constructor
+Shape destructor
+
+
+Executed In: 0.35 ms
