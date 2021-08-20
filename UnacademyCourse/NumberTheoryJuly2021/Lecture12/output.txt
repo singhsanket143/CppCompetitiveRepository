@@ -1,0 +1,4 @@
+fib(n) = 21
+
+
+Executed In: 0.241 ms
