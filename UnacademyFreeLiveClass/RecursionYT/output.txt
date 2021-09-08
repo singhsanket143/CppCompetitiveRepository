@@ -1,0 +1,18 @@
+Move 1th disk from 65 to 66 using 67
+Move 2th disk from 65 to 67 using 66
+Move 1th disk from 66 to 67 using 65
+Move 3th disk from 65 to 66 using 67
+Move 1th disk from 67 to 65 using 66
+Move 2th disk from 67 to 66 using 65
+Move 1th disk from 65 to 66 using 67
+Move 4th disk from 65 to 67 using 66
+Move 1th disk from 66 to 67 using 65
+Move 2th disk from 66 to 65 using 67
+Move 1th disk from 67 to 65 using 66
+Move 3th disk from 66 to 67 using 65
+Move 1th disk from 65 to 66 using 67
+Move 2th disk from 65 to 67 using 66
+Move 1th disk from 66 to 67 using 65
+
+
+Executed In: 0.315 ms

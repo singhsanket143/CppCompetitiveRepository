@@ -1,0 +1,2 @@
+         bool el = row[i];
+       

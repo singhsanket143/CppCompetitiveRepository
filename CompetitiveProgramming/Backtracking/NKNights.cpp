@@ -18,10 +18,11 @@ bool isItSafe(bool **board, int n, int row, int col) {
 
 		return true;
 }
-
+int ways = 0;
 void printNKnights(bool **board,int n, int placed, int sr, int sc, string osf) {
 		if (placed == n) {
 			cout<< osf << endl;;
+			ways++;
 			return;
 		}
 
@@ -51,5 +52,6 @@ int main(int argc, char const *argv[])
 		}
 	}
 	printNKnights(board, n, 0, 0, 0, "");
+	std::cout<<ways<<"\n";
 	return 0;
 }
