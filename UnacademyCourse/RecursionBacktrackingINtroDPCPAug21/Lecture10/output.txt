@@ -1,0 +1,4 @@
+Lis = 6
+
+
+Executed In: 0.144 ms

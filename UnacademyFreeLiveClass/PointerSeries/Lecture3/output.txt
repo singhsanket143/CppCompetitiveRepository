@@ -1,0 +1,21 @@
+Constructor called
+Destructor Called
+Constructor called
+3
+2
+Constructor called
+Destructor Called
+t3 = 0x121e06860
+t3 = 0x0
+t2 = 0x121e06860
+Destructor Called
+t2 = 0x0
+0
+75
+use count = 2
+value of w = 0
+value of w = 0
+value of w = 1
+
+
+Executed In: 0.128 ms
