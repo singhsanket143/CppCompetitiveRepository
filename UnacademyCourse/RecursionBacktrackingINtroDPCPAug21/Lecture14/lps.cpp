@@ -48,51 +48,49 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int dp[1005][1005];
+int lps(std::string &str, int i, int j) {
+    if(i == j) return 1;
+    if(str[i] == str[j] and (i + 1 == j)) {
+        return 2;
     }
-    return dp[n];
+    if(dp[i][j] != -1) return dp[i][j];
+    if(str[i] == str[j]) {
+        return dp[i][j] = 2 + lps(str, i+1, j-1);
+    } 
+    return dp[i][j] = std::max(lps(str, i+1, j), lps(str, i, j-1));
 }
 
+int lpsBU(std::string str) {
+    int n = str.size();
+    std::vector<std::vector<int> > dp(n, std::vector<int> (n, 0));
+    for(int i = 0; i < n; i++) {
+        dp[i][i] = 1;
+    }
+    for(int len = 2; len <= n; len++) {
+        for(int i = 0; i <= n - len; i++) {
+            int j = i + len - 1;
+            if(str[i] == str[j] and len == 2) {
+                dp[i][j] = 2;
+            } else if(str[i] == str[j]) {
+                dp[i][j] = 2 + dp[i+1][j-1];
+            } else {
+                dp[i][j] = std::max(dp[i+1][j], dp[i][j-1]);
+            }
+        }
+    }
+    return dp[0][n-1];
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    std::string s = "bbabcbcab";
+    std::cout<<lps(s, 0, s.size() - 1)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://www.hackerearth.com/practice/basic-programming/bit-manipulation/basics-of-bit-manipulation/practice-problems/algorithm/game-of-destruction-f96cd509/
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -54,45 +54,36 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-    return dp[n];
-}
-
-
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
     int n;
     std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    vi a(n);
+    vi b(n);
+    
+    loop(i, 0, n-1) std::cin>>a[i];
+    loop(i, 0, n-1) std::cin>>b[i];
+
+    ll c1 = 0, c2 = 0, s1 = 0, s2 = 0;
+    loop(i, 0, n-1) {
+        s1 += a[i];
+        c1 = c1 | a[i];
+    }
+    ll r1 = s1 - c1;
+    loop(i, 0, n-1) {
+        s2 += b[i];
+        c2 = c2 | b[i];
+    }
+    ll r2 = s2 - c2;
+    if(r1 > r2) {
+        std::cout<<1<<" "<<r1 - r2<<"\n";
+    } else if  (r2 > r1) {
+        std::cout<<2<<" "<<r2 - r1<<"\n";
+    } else {
+        std::cout<<"-1\n";
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

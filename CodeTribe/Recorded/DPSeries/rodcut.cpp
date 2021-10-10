@@ -54,46 +54,52 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
+std::vector<int> prices;
+int dp[1005];
+int rod_cut(int n) {
+    if(n <= 1) return prices[1];
     if(dp[n] != -1) return dp[n];
+    int result = INT_MIN;
+    for(int j = 1; j < n; j++) {
+        result = std::max(result, rod_cut(n-j) + prices[j]);
+    }
 
-    return dp[n] = fib(n-1) + fib(n-2);
+    return dp[n] = result;
 }
 
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
+int rod_cut_bu(int n) {
     std::vector<int> dp(n+1, 0);
     dp[0] = 0;
-    dp[1] = 1;
+    dp[1] = prices[1];
+
     for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+        int result = INT_MIN;
+        for(int j = 1; j < i; j++) {
+            result = std::max(result, prices[j] + dp[i - j]);
+        }
+        dp[i] = result;
     }
     return dp[n];
 }
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
+
     int n;
     std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
-
+    int m;
+    std::cin>>m;
+    std::memset(dp, -1, sizeof dp);
+    prices.pb(0);
+    for(int i = 0; i < m; i++) {
+        int x;
+        std::cin>>x;
+        prices.pb(x);
+    }
+    std::cout<<rod_cut(n)<<"\n";
+    std::cout<<rod_cut_bu(n)<<"\n";
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
       std::cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

@@ -53,46 +53,23 @@ void file_i_o()
         freopen("output.txt", "w", stdout);
     #endif
 }
-
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int dp[100];
+ll no_of_bst(int n) {
+    if(n <= 1) return 1;
+    if(dp[n] != -1) return dp[n]; 
+    ll result = 0;
+    for(int i = 0; i < n; i++) {
+        result += no_of_bst(i)*no_of_bst(n - i - 1);
     }
-    return dp[n];
+    return dp[n] = result;
 }
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    std::cout<<no_of_bst(4)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

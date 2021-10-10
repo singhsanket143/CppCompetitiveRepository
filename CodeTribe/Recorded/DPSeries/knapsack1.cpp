@@ -54,45 +54,83 @@ void file_i_o()
     #endif
 }
 
+std::vector<int> wt;
+std::vector<int> val;
+int MW;
+int n;
+int dp[105][100005];
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int knapsack(int i, int j) {
+    
+    if(i == 0 or j <= 0) {
+        return 0;
     }
-    return dp[n];
+    if(dp[i][j] != -1) return dp[i][j];
+
+    int result = 0;
+    if(wt[i] <= j) {
+        // pick or not pick
+        int v1 = knapsack(i-1, j); // not pick
+        int v2 = knapsack(i-1, j - wt[i]) + val[i]; // pick
+        result = std::max(v1, v2);
+    } else {
+        // not pick
+        result = knapsack(i-1, j); // not pick
+    }
+    return dp[i][j] = result;
 }
 
+
+ll knapsackBU1(int n, int mW) {
+    // TC - O(nMW) SC - O(nMW)
+    std::vector<std::vector<ll> > dp(n+1, std::vector<ll> (mW+1, 0));
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= mW; j++) {
+            dp[i][j] = dp[i-1][j];
+            if(wt[i] <= j) {
+                dp[i][j] = std::max(dp[i][j], val[i] + dp[i-1][j-wt[i]]);
+            }
+        }
+    }
+    return dp[n][mW];
+}
+
+ll knapsackBU2(int n, int mW) {
+    // TC - O(nMW) SC - O(mW)
+    std::vector<ll> dp_i_(mW+1, 0);
+    std::vector<ll> dp_i_1(mW+1, 0);
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= mW; j++) {
+            dp_i_[j] = dp_i_1[j];
+            if(wt[i] <= j) {
+                dp_i_[j] = std::max(dp_i_[j], dp_i_1[j-wt[i]] + val[i]);
+            }
+        }
+        dp_i_.swap(dp_i_1);
+        dp_i_.clear();
+    }
+    return dp_i_1[mW];
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+
+    std::cin>>n>>MW;
+    val.pb(0);
+    wt.pb(0);
+    for(int i = 0; i < n; i++) {
+        int value, w;
+        std::cin>>value>>w;
+        val.pb(value);
+        wt.pb(w);
+    }
+    
+    std::cout<<knapsack(n, MW)<<"\n";
+    std::cout<<knapsackBU1(n, MW)<<"\n";
+    std::cout<<knapsackBU2(n, MW)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

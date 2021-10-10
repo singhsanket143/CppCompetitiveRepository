@@ -1,0 +1,4 @@
+f(10) = 3
+
+
+Executed In: 0.12 ms

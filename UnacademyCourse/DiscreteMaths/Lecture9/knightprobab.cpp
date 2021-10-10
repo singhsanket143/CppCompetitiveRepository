@@ -54,45 +54,51 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int di[] = {2,2,1,1,-1,-1,-2,-2};
+int dj[] = {1,-1,2,-2,2,-2,1,-1};
+double dp[105][30][30];
+double kptd(int n, int k, int i, int j) {
+    if(i < 0 or j < 0 or  i >= n or j >= n) return 0;
+    if(k == 0) return 1;
+    if(dp[k][i][j] > -0.9) return dp[k][i][j];
+    double ans = 0.0;
+    for(int d = 0; d < 8; d++) {
+        ans += kptd(n, k-1, i+di[d], j+dj[d])*(0.125);
     }
-    return dp[n];
+    return dp[k][i][j] = ans;
 }
 
+double kpbu(int n, int k, int i, int j) {
+    std::vector<std::vector<double> > dp1(n, std::vector<double> (n, 0));
+    dp1[i][j] = 1.0;
+    for(; k > 0; k--) {
+        std::vector<std::vector<double> > dp2(n, std::vector<double> (n, 0));
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                for(int d = 0; d < 8; d++) {
+                    int ni = i+di[d];
+                    int nj = j+dj[d];
+                    if(ni >= 0 and  nj >= 0 and ni < n and nj < n) {
+                        dp2[ni][nj] += dp1[i][j]*(0.125);
+                    }
+                }
+            }
+        }
+        dp1 = dp2;
+    }
+    double ans = 0.0;
+    for(auto &row : dp1) {
+        for(int m = 0; m < n; m++) {
+            ans += row[m];
+        }
+    }
+    return ans;
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

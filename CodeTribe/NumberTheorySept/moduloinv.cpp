@@ -55,44 +55,38 @@ void file_i_o()
 }
 
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+struct extended {
+    ll gcd;
+    ll x;
+    ll y;
+    extended() {}
+    extended(ll g, ll x1, ll y1) {
+        gcd = g;
+        x = x1;
+        y = y1;
     }
-    return dp[n];
+};
+
+extended extended_euclid(ll a, ll b) { // a > b
+    if(b > a) return extended_euclid(b, a);
+    if(b == 0) {
+        return extended(a, 1, 0);
+    }
+
+    extended result = extended_euclid(b, a%b);
+    extended ans(result.gcd, result.y, result.x - (a/b)*result.y);
+    return ans;
 }
 
+int modInv(ll a, ll m) {
+    struct extended ans = extended_euclid(a, m);
+    return (ans.x + m)%m;
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

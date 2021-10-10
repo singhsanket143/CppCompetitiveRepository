@@ -54,45 +54,32 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+ll target_sum(std::vector<int> &arr, int target) {
+    int n = arr.size();
+    std::vector<std::vector<bool> > dp(n+1, std::vector<bool> (target+1, false));
+    dp[0][0] = true;
+    for(int i = 1; i <= n; i++) {
+        dp[i][0] = true;
     }
-    return dp[n];
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= target; j++) {
+            dp[i][j] = dp[i-1][j];
+            if(arr[i-1] <= j) {
+                dp[i][j] = dp[i][j] or dp[i-1][j-arr[i-1]];
+            }
+        }
+    }
+    return dp[n][target];
 }
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    std::vector<int> arr {3,34,4,12,5,2};
+    int t = 9;
+    std::cout<<target_sum(arr, t)<<"\n";
+
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

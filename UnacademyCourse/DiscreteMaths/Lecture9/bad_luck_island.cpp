@@ -54,45 +54,58 @@ void file_i_o()
     #endif
 }
 
+ld dp[105][105][105];
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
+ld fr(int r, int s, int p) {
+    if(r == 0 or s == 0) return 0.0;
+    if(p == 0) return 1.0;
+    if(dp[r][s][p] > -0.9) return dp[r][s][p];
+    ld total = r*s + s*p + r*p;
+    ld result = 0.0;
+    result += fr(r-1, s, p) * ((r*p)/total);
+    result += fr(r, s-1, p) * ((r*s)/total);
+    result += fr(r, s, p-1) * ((s*p)/total);
+    return dp[r][s][p] = result;
 }
 
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
+ld fs(int r, int s, int p) {
+    if(s == 0 or p == 0) return 0.0;
+    if(r == 0) return 1.0;
+    if(dp[r][s][p] > -0.9) return dp[r][s][p];
+    ld total = r*s + s*p + r*p;
+    ld result = 0.0;
+    result += fs(r-1, s, p) * ((r*p)/total);
+    result += fs(r, s-1, p) * ((r*s)/total);
+    result += fs(r, s, p-1) * ((s*p)/total);
+    return dp[r][s][p] = result;
 }
 
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
-    }
-    return dp[n];
+ld fp(int r, int s, int p) {
+    if(p == 0 or r == 0) return 0.0;
+    if(s == 0) return 1.0;
+    if(dp[r][s][p] > -0.9) return dp[r][s][p];
+    ld total = r*s + s*p + r*p;
+    ld result = 0.0;
+    result += fp(r-1, s, p) * ((r*p)/total);
+    result += fp(r, s-1, p) * ((r*s)/total);
+    result += fp(r, s, p-1) * ((s*p)/total);
+    return dp[r][s][p] = result;
 }
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
+    int r, s, p;
+    std::cin>>r>>s>>p;
+    ld ans_r, ans_p, ans_s;
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    ans_r = fr(r,s,p);
+    std::memset(dp, -1, sizeof dp);
+    ans_s = fs(r,s,p);
+    std::memset(dp, -1, sizeof dp);
+    ans_p = fp(r,s,p);
+    std::cout<<std::fixed<<std::setprecision(9)<<ans_r<<" "<<ans_s<<" "<<ans_p<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

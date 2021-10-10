@@ -54,46 +54,40 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+std::vector<int> coins {1,5,7};
+int dp[100005];
+ll min_coin(int i) {
+    if(i == 0) return 0;
+    if(dp[i] != -1) return dp[i];
+    ll result = INT_MAX;
+    for(int j = 0; j < coins.size(); j++) {
+        result = std::min(result, 1 + min_coin(i - coins[j]));
     }
+
+    return dp[i] = result;
+}
+
+ll min_cost_BU(int n) {
+    std::vector<int> dp(n+1, INT_MAX);
+    dp[0] = 0;
+
+    for(int i = 1; i <= n; i++) {
+        for(int j = 0; j < coins.size(); j++) {
+            if(coins[j] > i) continue;
+            dp[i] = std::min(dp[i], 1 + dp[i - coins[j]]);
+        }
+    }
+
     return dp[n];
 }
-
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
-
+    std::cout<<min_coin(11)<<"\n";
+    std::cout<<min_cost_BU(11)<<"\n";
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
       std::cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

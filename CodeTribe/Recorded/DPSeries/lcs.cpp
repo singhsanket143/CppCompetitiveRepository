@@ -54,45 +54,98 @@ void file_i_o()
     #endif
 }
 
+std::string s1;
+std::string s2;
+int dp[1005][1005];
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int lcs(int i, int j) { // top down dp implementations
+    // base case
+    if(i < 0 or j < 0) return 0;
+    if(dp[i][j] != -1) return dp[i][j];
+    if(s1[i] == s2[j]) return dp[i][j] = 1 + lcs(i-1, j-1);
+    else {
+        return dp[i][j] = std::max(lcs(i-1, j), lcs(i, j-1));
     }
-    return dp[n];
 }
 
+int lcsBU1() {
+    int n = s1.size();
+    int m = s2.size();
+    std::vector<std::vector<int> > dp(n+1, std::vector<int> (m+1, 0));
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            if(s1[i-1] == s2[j-1]) {
+                dp[i][j] = 1 + dp[i-1][j-1];
+            } else {
+                dp[i][j] = std::max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    return dp[n][m];
+}
+
+int lcsBU2() {
+    int n = s1.size();
+    int m = s2.size();
+    std::vector<int> dp1(m+1, 0);
+    std::vector<int> dp2(m+1, 0);
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            if(s1[i-1] == s2[j-1]) {
+                dp2[j] = 1 + dp1[j];
+            } else {
+                dp2[j] = std::max(dp1[j], dp2[j-1]);
+            }
+        }
+        dp1.swap(dp2);
+        dp2.clear();
+    }
+    return dp1[m];
+}
+
+std::string printLCS() {
+    int n = s1.size();
+    int m = s2.size();
+    std::vector<std::vector<int> > dp(n+1, std::vector<int> (m+1, 0));
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            if(s1[i-1] == s2[j-1]) {
+                dp[i][j] = 1 + dp[i-1][j-1];
+            } else {
+                dp[i][j] = std::max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    int i = n, j = m;
+    std::string result = "";
+    while(i > 0 and j > 0) {
+        if(s1[i-1] == s2[j-1]) {
+            result += s1[i-1];
+            i--;
+            j--;
+        } else {
+            if(dp[i-1][j] > dp[i][j-1]) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+    }
+    std::reverse(result.begin(), result.end());
+    return result;
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
+    s1 = "axyb";
+    s2 = "abyxb";
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    log(lcs(s1.size() - 1, s2.size() - 1));
+    log(lcsBU1());
+    log(lcsBU2());
+    log(printLCS());
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

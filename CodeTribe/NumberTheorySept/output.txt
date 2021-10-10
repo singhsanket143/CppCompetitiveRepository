@@ -1,0 +1,4 @@
+gcd_euclid(126 = 6
+
+
+Executed In: 0.252 ms

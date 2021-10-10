@@ -1,6 +1,7 @@
 // Problem Link - 
 /* By Sanket Singh */
 #include<bits/stdc++.h>
+#include <unordered_map>
 //#include<ext/pb_ds/assoc_container.hpp>
 //#include<ext/pb_ds/tree_policy.hpp>
 //#include <ext/pb_ds/trie_policy.hpp>
@@ -54,31 +55,24 @@ void file_i_o()
     #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+std::bitset<1000005> p;
+std::unordered_map<int, int> m;
+void cubes(int n) {
+    p.set();
+    for(int i = 2; i*i*i < n; i++) {
+        if(p[i]) {
+            for(int j = 1; i*i*i*j <= n; j++) {
+                p[i*i*i*j] = 0;
+            }
+        }
     }
-    return dp[n];
+    int c = 1;
+    m[1] = 1;
+    for(int i = 2; i < 1000005; i++) {
+        if(p[i]) {
+            m[i] = ++c;
+        }
+    }
 }
 
 
@@ -86,13 +80,18 @@ int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    int t;
+    std::cin>>t;
+    cubes(1000000);
+    for(int i = 1; i <= t; i++) {
+        int n;
+        std::cin>>n;
+        if(m.count(n)) {
+            std::cout<<"Case "<<i<<": "<<m[n]<<"\n";
+        } else {
+            std::cout<<"Case "<<i<<": Not Cube Free\n";
+        }
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

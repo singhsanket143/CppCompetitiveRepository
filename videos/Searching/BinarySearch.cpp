@@ -48,51 +48,46 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
 }
 
-
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+int binary_search_recursive(int lo, int hi, int t, std::vector<int> &arr) {
+    if(lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        if(arr[mid] == t) return mid;
+        else if(arr[mid] > t) {
+            return binary_search_recursive(lo, xmid-1, t, arr);
+        } else {
+            return binary_search_recursive(mid+1, hi, t, arr);
+        }
     }
-    return dp[n];
+    return -1;
 }
 
+int binary_search(std::vector<int> &arr, int target) {
+    int lo = 0, hi = arr.size() - 1;
+
+    while(lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        if(arr[mid] == target) return mid;
+        else if(arr[mid] > target) {
+            hi = mid - 1;
+        } else {
+            lo = mid + 1;
+        }
+    }
+    return -1;
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+
+    std::vector<int> v {1,2,3,4,5,6,7,8};
+    int target = 1;
+
+    std::cout<<binary_search(v, target)<<"\n";
+    std::cout<<binary_search_recursive(0, v.size() - 1, target, v)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

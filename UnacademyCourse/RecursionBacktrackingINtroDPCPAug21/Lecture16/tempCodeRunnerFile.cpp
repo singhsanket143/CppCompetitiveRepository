@@ -1,0 +1,2 @@
+
+    ll result = 0;

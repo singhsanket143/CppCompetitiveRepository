@@ -54,31 +54,44 @@ void file_i_o()
     #endif
 }
 
+std::vector<ll> arr;
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+ll dp[105][105];
+ll g(int i, int j) {
+    ll result = 0;
+    for(int m = i; m <= j; m++) {
+        result = (result%100 + arr[m]%100)%100;
     }
-    return dp[n];
+    // log(result);
+    return result;
+}
+ll mix(int i, int j) {
+    if(i == j) return dp[i][j] = 0;
+    if(dp[i][j] != -1) return dp[i][j];
+
+    ll result = INT_MAX;
+
+    for(int k = i; k <= j-1; k++) {
+        result = std::min(result, mix( i,k) + mix(k+1, j) + (g(i,k)*g(k+1, j)));
+    }
+
+    return dp[i][j] = result;
+}
+
+ll mixBU(int n) {
+    std::memset(dp, 0, sizeof dp);
+
+    for(int len = 2; len <= n; len++) {
+        for(int i = 0; i <= n-len; i++) {
+            int j = i + len - 1;
+            ll result = INT_MAX;
+            for(int k = i; k <= j-1; k++) {
+                result = std::min(result, dp[i][k] + dp[k+1][j] + (g(i,k)*g(k+1, j)));
+            }
+            dp[i][j] = result;
+        }
+    }
+    return dp[0][n-1];
 }
 
 
@@ -87,12 +100,26 @@ int main(int argc, char const *argv[]) {
     file_i_o();
     // Write your code here....
     std::memset(dp, -1, sizeof dp);
-    log(fib(6));
     int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+    while(std::cin>>n) {
+        // log(n);
+        loop(i, 0, n-1) {
+            int x;
+            std::cin>>x;
+            arr.pb(x);
+        }
+        // logarr(arr, 0, n-1);
+        // std::cout<<mix(0, n-1)<<"\n";
+        std::cout<<mixBU(n)<<"\n";
+        // loop(i, 0, n-1) {
+        //     loop(j, 0, n-1) {
+        //         std::cout<<dp[i][j]<<" ";
+        //     }
+        //     std::cout<<"\n";
+        // }
+        arr.clear();
+        std::memset(dp, -1, sizeof dp);
+    }
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://codeforces.com/problemset/problem/429/B
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -13,6 +13,7 @@
 #define pb 				push_back
 #define eb				emplace_back
 #define vi              std::vector<ll>
+#define vii             std::vector<std::vector<ll> > 
 #define vs				std::vector<std::string>
 #define pii             std::pair<ll,ll>
 #define ump				std::unordered_map
@@ -55,44 +56,59 @@ void file_i_o()
 }
 
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
+ll maxCalorie(int n, int m, vii &cal) {
+    vii f(n+2, vi(m+2, 0)); // starting from 0,0 to i, j with right or down
+    vii g(n+2, vi(m+2, 0)); // starting from i, j to n-1, m-1 with right or down move
+    vii h(n+2, vi(m+2, 0)); // starting from n-1, 0 to i, j with up or roght move
+    vii a(n+2, vi(m+2, 0));
 
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            f[i][j] = cal[i][j] + std::max(f[i-1][j], f[i][j-1]);
+        }
     }
-    return dp[n];
-}
 
+    for(int i = n; i >= 1; i--) {
+        for(int j = m; j >= 1; j--) {
+            g[i][j] = cal[i][j] + std::max(g[i+1][j], g[i][j+1]);
+        }
+    }
+    for(int i = n; i >= 1; i--) {
+        for(int j = 1; j <= m; j++) {
+            h[i][j] = cal[i][j] + std::max(h[i+1][j], h[i][j-1]);
+        }
+    }
+    for(int i = 1; i <= n; i++) {
+        for(int j = m; j >= 1; j--) {
+            a[i][j] = cal[i][j] + std::max(a[i][j+1], a[i-1][j]);
+        }
+    }
+
+    ll ans = INT_MIN;
+    for(int i = 2; i < n; i++) {
+        for(int j = 2; j < m; j++) {
+            ans = std::max(ans, f[i][j-1] + g[i][j+1] + h[i+1][j] + a[i-1][j]); // case 1
+            ans = std::max(ans, f[i-1][j] + g[i+1][j] + h[i][j-1] + a[i][j+1]); // case 2
+        }
+    }
+    return ans;
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
-    std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
+
+    int n, m;
+    std::cin>>n>>m;
+    vii cal(n+1, vi (m+1));
+    loop(i, 1, n) {
+        loop(j, 1, m) {
+            std::cin>>cal[i][j];
+        }
+    }
+
+    std::cout<<maxCalorie(n, m, cal)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

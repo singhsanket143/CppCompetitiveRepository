@@ -48,52 +48,53 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+    
 }
 
+vi cap(10005, 0);
+vi as(10005, 0);
 
-int dp[1000]; // what size ? 
-int fib(int n) {
-    //base case
-    if(n == 0 || n == 1) return n;
-    if(dp[n] != -1) return dp[n];
-
-    return dp[n] = fib(n-1) + fib(n-2);
-}
-
-int fibTD(int n, std::vector<int> &memo) {
-    if(n == 0 || n == 1) return n;
-    if(memo[n] != -1) return memo[n]; // this is checking whther the state is already computed or not
-
-    return memo[n] = fibTD(n-1, memo) + fibTD(n-2, memo);
-}
-
-int fibBU(int n) {
-    std::vector<int> dp(n+1, 0);
-    dp[0] = 0;
-    dp[1] = 1;
-    for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+ll dp[10005][5005];
+int n;
+ll f(int i, int c, int a) {
+    if(i == n) return 0;
+    if(dp[i][a] != -1) return dp[i][a];
+    
+    if(a == n/2) {
+        return dp[i][a] = f(i+1, c+1, a) + cap[i];
+    } else if(a == c) {
+        return dp[i][a] = f(i+1, c, a+1) + as[i];
+    } else {
+        return dp[i][a] = std::min(f(i+1, c+1, a) + cap[i], f(i+1, c, a+1) + as[i]);
     }
-    return dp[n];
+
 }
 
+ll g(int i, int a) {
+    if(i == n) return 0;
+    if(dp[i][a] != -1) return dp[i][a];
+    
+    if(a == n/2) {
+        return dp[i][a] = g(i+1, a) + cap[i];
+    } else if(a == i-a) { // c+a == i
+        return dp[i][a] = g(i+1, a+1) + as[i];
+    } else {
+        return dp[i][a] = std::min(g(i+1, a) + cap[i], g(i+1, a+1) + as[i]);
+    }
+
+}
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, -1, sizeof dp);
-    log(fib(6));
-    int n;
     std::cin>>n;
-    std::vector<int> dp(n+1, -1);
-    log(fibTD(n, dp));
-    log(fibBU(n));
-
+    for(int i = 0; i < n; i++) {
+        std::cin>>cap[i]>>as[i];
+    }
+    std::memset(dp, -1, sizeof dp);
+    ll result = as[0] + g(1, 1);
+    std::cout<<result<<"\n";
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
       std::cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
