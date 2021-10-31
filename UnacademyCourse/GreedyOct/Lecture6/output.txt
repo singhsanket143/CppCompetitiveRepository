@@ -1,0 +1,66 @@
+aaaaabbbbbbbbbccccccccccccdddddddddddddeeeeeeeeeeeeeeeefffffffffffffffffffffffffffffffffffffffffffff
+(char)el1->data.ff = a
+el1->data.ss = 5
+(char)el2->data.ff = b
+el2->data.ss = 9
+el1 = 0x12df043d0
+el2 = 0x12df04360
+temp = 0x12df04450
+(char)el1->data.ff = c
+el1->data.ss = 12
+(char)el2->data.ff = d
+el2->data.ss = 13
+el1 = 0x12df04330
+el2 = 0x12df042e0
+temp = 0x12df04480
+(char)el1->data.ff =  
+el1->data.ss = 14
+(char)el2->data.ff = e
+el2->data.ss = 16
+el1 = 0x12df04450
+el2 = 0x12df042a0
+temp = 0x12df044b0
+(char)el1->data.ff =  
+el1->data.ss = 25
+(char)el2->data.ff =  
+el2->data.ss = 30
+el1 = 0x12df04480
+el2 = 0x12df044b0
+temp = 0x12df044e0
+(char)el1->data.ff = f
+el1->data.ss = 45
+(char)el2->data.ff =  
+el2->data.ss = 55
+el1 = 0x12df04210
+el2 = 0x12df044e0
+temp = 0x12df04510
+  100
+Left
+f 45
+right
+  55
+Left
+  25
+Left
+c 12
+right
+d 13
+right
+  30
+Left
+e 16
+right
+  14
+Left
+a 5
+right
+b 9
+b 1111
+e 110
+d 101
+c 100
+a 1110
+f 0
+
+
+Executed In: 1 ms
