@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://www.spoj.com/problems/CPCRC1C/
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -48,70 +48,46 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        // freopen("output.txt", "w", stdout);
-    #endif
+   
 }
 
-struct node {
-    ll sum;
-    ll maxsum;
-    ll bps;
-    ll bss;
-};
-
-void build(vi &arr, std::vector<node*> &tree, ll s, ll e, ll ti) {
-    if(s == e) {
-        tree[ti]->maxsum = tree[ti]->sum = tree[ti]->bps = tree[ti]->bss = arr[s];
-        return ;
-    }
-
-    ll m = mid(s, e);
-    build(arr, tree, s, m, 2*ti);
-    build(arr, tree, m+1, e, 2*ti+1);
-    tree[ti]->sum = tree[2*ti]->sum + tree[2*ti+1]->sum;
-    tree[ti]->bss = std::max(tree[2*ti+1]->sum + tree[2*ti]->bss, tree[2*ti+1]->bss);
-    tree[ti]->bps = std::max(tree[2*ti]->sum + tree[2*ti+1]->bps, tree[2*ti]->bps);
-    tree[ti]->maxsum = std::max({tree[2*ti]->maxsum, tree[2*ti+1]->maxsum, tree[2*ti]->sum + tree[2*ti+1]->bps, tree[2*ti+1]->sum + tree[2*ti]->bss, tree[2*ti]->bss+tree[2*ti+1]->bps});
+ll power_of_10(int x) {
+    ll res = 1;
+    loop(i, 1, x) res *= 10;
+    return res;
 }
 
-node* query(std::vector<node*> &tree, ll s, ll e, ll ti, ll l, ll r) {
-    node *temp = new node();
-    temp->sum = temp->bps = temp->bss = temp->maxsum = INT_MIN;
-    if(r < s or l > e) {
-        return temp;
+
+ll f(ll num) {
+    if(num/10 == 0) {
+        return ((num)*(num+1))/2;
     }
-    if(s >= l and e <= r) {
-        return tree[ti];
+    std::string s = std::to_string(num);
+    int n = s.size();
+    ll pown_1 = power_of_10(n-1);
+    int first = num/pown_1;
+    ll result = 0;
+    ll sum = power_of_10(n-2)*45*(n-1);
+    loop(i, 0, first-1) {
+        result += ((i)*pown_1 + sum);
     }
-    ll m = mid(s, e);
-    node *left = query(tree, s, m, 2*ti, l, r);
-    node *right = query(tree, m+1, e, 2*ti+1, l, r);
-    temp->sum = left->sum + right->sum;
-    temp->bps = std::max(left->bps, left->sum+right->bps);
-    temp->bss = std::max(right->bss, right->sum+left->bss);
-    temp->maxsum = std::max({left->maxsum, right->maxsum, left->sum + right->bps, right->sum + left->bss, left->bss+right->bps});
-    return temp;
+    int rest_of_the_number = num % pown_1;
+    result += first * (rest_of_the_number + 1);
+    result += f(rest_of_the_number);
+    return result;
 }
 
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    int n;
-    std::cin>>n;
-    vi arr(n);
-    loop(i, 0, n-1) std::cin>>arr[i];
-    std::vector<node*> tree(4*n);
-    loop(i, 0, 4*n-1) tree[i] = new node();
-    build(arr, tree, 0, n-1, 1);
-    int q;
-    std::cin>>q;
-    while(q--) {
-        int l , r;
-        std::cin>>l>>r;
-        std::cout<<query(tree, 0, n-1, 1, l-1, r-1)->maxsum<<"\n";
+    ll a, b;
+    while(true) {
+        std::cin>>a>>b;
+        if(a == -1 and b == -1) break;
+        ll x = f(b);
+        ll y = f(a-1);
+        std::cout<<x-y<<"\n";
     }
 
     #ifndef ONLINE_JUDGE 

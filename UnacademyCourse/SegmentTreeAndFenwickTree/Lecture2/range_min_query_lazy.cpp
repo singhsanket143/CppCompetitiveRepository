@@ -82,9 +82,9 @@ ll query(int nl, int nr, int ti, int l, int r) {
 void update(int nl, int nr, int ti, int l, int r, int val) {
     if(lazy[ti] != 0) {
         // you have a loan
-        tree[ti] += lazy[ti];
-        if(nl != nr) {
-            lazy[2*ti+1] += lazy[ti];
+        tree[ti] += lazy[ti]; // (nr - nl+1)*val
+        if(nl != nr) { // if a non leaf node
+            lazy[2*ti+1] += lazy[ti]; // val
             lazy[2*ti+2] += lazy[ti];
         }
         lazy[ti] = 0;
