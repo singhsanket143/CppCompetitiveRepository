@@ -48,9 +48,13 @@ void file_i_o()
     std::ios_base::sync_with_stdio(0); 
     std::cin.tie(0); 
     std::cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
 
-ll dp[(1<<24)][2];
+int dp[(1<<24)][2];
 ll n;
 ll form_number(std::string &s) {
     ll res = 0;
@@ -65,7 +69,7 @@ int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    std::memset(dp, 0, sizeof dp);
+    
     std::cin>>n;
     for(ll i = 1; i <= n; i++) {
         std::string str;
