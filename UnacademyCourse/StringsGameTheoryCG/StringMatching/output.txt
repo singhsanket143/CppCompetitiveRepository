@@ -1,0 +1,30 @@
+patHash = 0
+strHash = 0
+patHash = 0
+strHash = 0
+0
+patHash = 0
+strHash = 0
+patHash = 0
+strHash = 0
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = 0
+patHash = 0
+strHash = 0
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = -1
+patHash = 0
+strHash = -1
+
+
+Executed In: 0.633 ms

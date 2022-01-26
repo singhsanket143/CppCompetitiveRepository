@@ -55,7 +55,7 @@ vi getDigits(ll n) {
 	return v;
 }
 int main(int argc, char const *argv[]) {
-	file_i_o();
+//	file_i_o();
 	ll n;
 	cin>>n;
 	vector<ll> dp(n+1, INT_MAX);
