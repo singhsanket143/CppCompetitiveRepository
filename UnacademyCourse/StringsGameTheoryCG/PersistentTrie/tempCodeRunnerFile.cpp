@@ -1,0 +1,2 @@
+
+            prev = trie[prev].left;
