@@ -28,13 +28,13 @@ class Line {
 public:
     int a, b, c;
     Line(int a, int b, int c) : a(a), b(b), c(c) {}
-}
+};
 
 int dot(Point &a, Point &b) {
     return (a.x * b.x) + (a.y * b.y) + (a.z + b.z);
 }
 
-Point cross(Point &a, Point &b) {
+Point cross(Point a, Point b) {
     return Point(a.y*b.z - b.y*a.z, b.x*a.z  - a.x*b.z, a.x*b.y - a.y*b.x);
 }
 
@@ -48,6 +48,21 @@ float angle(Point &a, Point &b) {
 
 Point intersectionOfTwoLines(Line &x, Line &y) {
     return Point((x.b*y.c - y.b*x.c)/(x.a*y.b - y.a*x.b), (x.c*y.a - y.c*x.a)/(x.a*y.b - y.a*x.b));
+}
+
+long long int signed_area_of_parallelogram(Point a, Point b, Point c) {
+    return cross(b-a, c-b).z;
+}
+
+double area_of_triangle(Point a, Point b, Point c) {
+    return abs(signed_area_of_parallelogram(a, b, c)/2.0);
+}
+
+int direction(Point a, Point b, Point c) {
+    long long int t = signed_area_of_parallelogram(a, b, c);
+    if(t < 0) return -1;
+    else if(t > 0) return 1;
+    else return 0;
 }
 
 int main(int argc, char const *argv[])
