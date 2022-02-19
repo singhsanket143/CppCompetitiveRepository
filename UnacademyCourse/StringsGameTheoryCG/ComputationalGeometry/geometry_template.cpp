@@ -65,6 +65,31 @@ int direction(Point a, Point b, Point c) {
     else return 0;
 }
 
+double area_of_polygon(Point a[], int n) {
+    double area = 0;
+    for(int i = 0; i < n; i++) {
+        area -= (a[(i+1)%n].x - a[i].x) * (a[(i+1)%n].y + a[i].y);
+    }
+    area /= 2;
+    return abs(area);
+}
+
+bool is_point_inside_polygon(Point a[], int n, Point p) {
+    int l = 1, r = n-2;
+    while(l <= r) {
+        int mid = (l+r)/2;
+        if(direction(a[0], a[mid+1], p) == 1) {
+            l = mid+1;
+        } else if(direction(a[0], a[mid], p) == -1) {
+            r = mid - 1;
+        } else {
+            l = r = mid;
+        }
+    }
+    if(area_of_triangle(a[0], a[l], a[l+1]) == area_of_triangle(a[0], a[l], p) + area_of_triangle(a[l], a[l+1], p) + area_of_triangle(a[0], p, a[l+1])) return true;
+    else return false;
+}
+
 int main(int argc, char const *argv[])
 {
     int x1, y1, x2, y2;
