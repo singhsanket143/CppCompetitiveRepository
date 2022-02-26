@@ -22,6 +22,11 @@ public:
         this->z -= b.z;
         return *this;
     }
+
+    bool operator<(Point b) {
+        if(this->x == b.x) return this->y < b.y;
+        return this->x < b.x;
+    }
 };
 
 class Line {
@@ -155,6 +160,36 @@ int max_points_in_a_circle(std::vector<Point> v, double r) {
     }
     return ans;
 }
+
+struct custom_closes_ds {
+    std::set<Point> st;
+    std::priority_queue<Point> hp; // max heap
+    long long int d;
+
+    bool ins(Point a) {
+        hp.push(Point(-a.x, a.y));
+        st.insert(Point(a.y, a.x));
+        return true;
+    }
+
+    void del(Point a) {
+        while(!hp.empty() and (-hp.top().x) < a.x-d) {
+            auto it = st.find(Point(hp.top().y, -hp.top().x));
+            st.erase(it);
+            hp.pop();
+        }
+    }
+    std::vector<Point> query(Point a) {
+        auto lb = st.lower_bound(Point(a.y-d, a.x-d));
+        auto ub = st.upper_bound(Point(a.y+d, a.x));
+        std::vector<Point> ans;
+        while(lb != ub) {
+            ans.push_back(Point((*lb).y, (*lb).x));
+            lb++;
+        }
+        return ans;
+    }
+};
 
 int main(int argc, char const *argv[])
 {
