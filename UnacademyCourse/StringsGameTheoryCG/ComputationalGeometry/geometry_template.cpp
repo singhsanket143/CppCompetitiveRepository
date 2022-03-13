@@ -1,22 +1,29 @@
 #include<bits/stdc++.h>
 #define PI 3.14159265
+void file_i_o()
+{
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+}
 class Point {
 public:
     int x, y, z;
     Point(int x, int y, int z = 0) : x(x), y(y), z(z) {}
-    Point operator+(const Point &b) {
+    Point operator+(const Point b) {
         return Point(this->x + b.x, this->y + b.y, this->z + b.z);
     } 
-    Point operator-(const Point &b) {
+    Point operator-(const Point b) {
         return Point(this->x - b.x, this->y - b.y, this->z - b.z);
     } 
-    Point& operator+=(const Point &b) {
+    Point& operator+=(const Point b) {
         this->x += b.x;
         this->y += b.y;
         this->z += b.z;
         return *this;
     }
-    Point& operator-=(const Point &b) {
+    Point& operator-=(const Point b) {
         this->x -= b.x;
         this->y -= b.y;
         this->z -= b.z;
@@ -27,6 +34,11 @@ public:
         if(this->x == b.x) return this->y < b.y;
         return this->x < b.x;
     }
+
+    bool operator==(Point b) {
+        if(this->x==b.x and this->y==b.y and this->z==b.z) return true;
+        else return false;
+    }
 };
 
 class Line {
@@ -36,11 +48,11 @@ public:
 };
 
 int dot(Point a, Point b) {
-    return (a.x * b.x) + (a.y * b.y) + (a.z + b.z);
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
 Point cross(Point a, Point b) {
-    return Point(a.y*b.z - b.y*a.z, b.x*a.z  - a.x*b.z, a.x*b.y - a.y*b.x);
+    return Point(a.y*b.z - a.z*b.y, a.z*b.x  - a.x*b.z, a.x*b.y - a.y*b.x);
 }
 
 float radianToDegree(float ang) {
@@ -65,8 +77,10 @@ double area_of_triangle(Point a, Point b, Point c) {
 
 int direction(Point a, Point b, Point c) {
     long long int t = signed_area_of_parallelogram(a, b, c);
-    if(t < 0) return -1;
-    else if(t > 0) return 1;
+    if(t < -1 or t > 1)
+        std::cout<<t<<"\n";
+    if(t < 0) return -1; // clockwise
+    else if(t > 0) return 1; // anticliockwise
     else return 0;
 }
 
@@ -161,46 +175,153 @@ int max_points_in_a_circle(std::vector<Point> v, double r) {
     return ans;
 }
 
-struct custom_closes_ds {
-    std::set<Point> st;
-    std::priority_queue<Point> hp; // max heap
-    long long int d;
+// struct custom_closes_ds {
+//     std::set<Point> st;
+//     std::priority_queue<Point> hp; // max heap
+//     long long int d;
 
-    bool ins(Point a) {
-        hp.push(Point(-a.x, a.y));
-        st.insert(Point(a.y, a.x));
+//     bool ins(Point a) {
+//         hp.push(Point(-a.x, a.y));
+//         st.insert(Point(a.y, a.x));
+//         return true;
+//     }
+
+//     void del(Point a) {
+//         while(!hp.empty() and (-hp.top().x) < a.x-d) {
+//             auto it = st.find(Point(hp.top().y, -hp.top().x));
+//             st.erase(it);
+//             hp.pop();
+//         }
+//     }
+//     std::vector<Point> query(Point a) {
+//         auto lb = st.lower_bound(Point(a.y-d, a.x-d));
+//         auto ub = st.upper_bound(Point(a.y+d, a.x));
+//         std::vector<Point> ans;
+//         while(lb != ub) {
+//             ans.push_back(Point((*lb).y, (*lb).x));
+//             lb++;
+//         }
+//         return ans;
+//     }
+// };
+
+std::vector<Point> convex_hull_jarvis_march(std::vector<Point> arr) {
+    int n = arr.size();
+    int start = 0;
+    // get the leftmost point, and if multiple leftmost point then bottom most
+    for(int i = 1; i < n; i++) {
+        if((arr[i].x < arr[start].x) or (arr[i].x == arr[start].x and arr[i].y < arr[start].y)) {
+            start = i;
+        }
+    }
+
+    std::vector<Point> ans;
+    ans.push_back(arr[start]);
+    while(true) {
+        int curr_pt = 0;
+        for(int i = 0; i < n; i++) {
+            if(arr[i] == ans.back()) continue;
+
+            if((direction(ans.back(), arr[curr_pt], arr[i])==-1) or
+                (direction(ans.back(), arr[curr_pt], arr[i])==0 and 
+                    dot(arr[i]-ans.back(), arr[i]-ans.back()) > dot(arr[curr_pt]-ans.back(), arr[curr_pt]-ans.back())
+                )
+            ) {
+                curr_pt = i;
+            }
+        }
+        if(arr[curr_pt] == ans.front()) break;
+        else ans.push_back(arr[curr_pt]);
+    }
+    return ans;
+}
+
+static Point polar_angle_point;
+
+bool cmp(Point a, Point b) {
+    if(direction(polar_angle_point, a, b)==1) {
         return true;
+    } 
+    else if(direction(polar_angle_point, a, b)==-1) {
+        return false;
     }
+    else return dot(polar_angle_point-a, polar_angle_point-a) < dot(polar_angle_point-b, polar_angle_point-b);
+}
 
-    void del(Point a) {
-        while(!hp.empty() and (-hp.top().x) < a.x-d) {
-            auto it = st.find(Point(hp.top().y, -hp.top().x));
-            st.erase(it);
-            hp.pop();
+std::vector<Point> convex_hull_grahamscan(std::vector<Point> a) {
+    int n = a.size();
+    if(n <= 2) return a;
+    for(int i = 1; i < n; i++) {
+        if((a[i].x<a[0].x) or (a[i].x==a[0].x and a[i].y < a[0].y)) {
+            std::swap(a[i], a[0]);
         }
     }
-    std::vector<Point> query(Point a) {
-        auto lb = st.lower_bound(Point(a.y-d, a.x-d));
-        auto ub = st.upper_bound(Point(a.y+d, a.x));
-        std::vector<Point> ans;
-        while(lb != ub) {
-            ans.push_back(Point((*lb).y, (*lb).x));
-            lb++;
+    polar_angle_point = a[0];
+    std::sort(a.begin()+1, a.end(), cmp);
+    std::vector<Point> ans;
+    ans.push_back(a[0]);
+    ans.push_back(a[1]);
+    for(int i = 2; i < n; i++) {
+
+        while(direction(ans[ans.size()-2], ans[ans.size()-1], a[i]) == -1) {
+            ans.pop_back();
         }
-        return ans;
+        ans.push_back(a[i]);
     }
-};
+    return ans;
+}
+
+// double diameter_of_convex_polygon(std::vector<Point> &a) {
+//     int n = a.size();
+//     int pt1 = 0;
+//     int pt2 = 1;
+//     while(cross(a[(pt1+1)%n]-a[pt1], a[(pt2+1)%n]-a[pt2]).z > 0) {
+//         pt2++;
+//         pt2%=n;
+//     }
+//     int ans = dot(a[pt2]-a[pt1], a[pt2]-a[pt1]);
+//     int st1 = pt1;
+//     int st2 = pt2;
+//     do {
+//         if(cross(a[(pt1+1)%n]-a[pt1], a[(pt2+1)%n]-a[pt2]).z > 0) {
+//             pt2++;
+//             pt2%=n;
+//         } else {
+//             pt1++;
+//             pt1%=n;
+//         }
+//         ans = std::max(ans, dot(a[pt2]-a[pt1], a[pt2]-a[pt1]));
+//     } while(st1!=pt1 || st2!=pt2);
+//     return std::sqrt((double) ans);
+// }
+
 
 int main(int argc, char const *argv[])
 {
-    int x1, y1, x2, y2;
-    std::cin>>x1>>y1>>x2>>y2;
-    Point a(x1, y1);
-    Point b(x2, y2);
+    // int x1, y1, x2, y2;
+    // std::cin>>x1>>y1>>x2>>y2;
+    // Point a(x1, y1);
+    // Point b(x2, y2);
 
-    Point c = a + b;
-    std::cout<<c.x<<" "<<c.y<<" ";
-    std::cout<<angle(a, b)<<"\n";
-    std::cout<<radianToDegree(angle(a, b))<<"\n";
+    // Point c = a + b;
+    // std::cout<<c.x<<" "<<c.y<<" ";
+    // std::cout<<angle(a, b)<<"\n";
+    // std::cout<<radianToDegree(angle(a, b))<<"\n";
+    file_i_o();
+    int t;
+    std::cin>>t;
+    for(int j = 1; j <= t; j++) {
+        int n;
+        std::cin>>n;
+        std::vector<Point> arr(n);
+        for(int i = 0; i < n; i++) {
+            std::cin>>arr[i].x>>arr[i].y;
+        }
+        std::vector<Point> hull = convex_hull_jarvis_march(arr);
+        std::cout<<"Case #"<<j<<"\n";
+        for(auto &p:hull) {
+            std::cout<<p.x<<" "<<p.y<<"\n";
+        }
+    }
     return 0;
 }
