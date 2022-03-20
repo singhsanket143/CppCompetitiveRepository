@@ -1,4 +1,4 @@
-// Problem Link - https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/permutation-swaps/
+// Problem Link - https://www.hackerrank.com/challenges/journey-to-the-moon/problem
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -53,77 +53,50 @@ void file_i_o()
         freopen("output.txt", "w", stdout);
     #endif
 }
-std::vector<std::vector<ll> > graph;
-std::vector<ll> a; // p
-std::vector<ll> b; // q
-void addEdge(int u, int v) {
-    graph[u].pb(v);
-    graph[v].pb(u);
-}
 
-void dfsHelper(int src, std::vector<bool> &visited, std::vector<ll> &p, std::vector<ll> &q) {
-    visited[src] = true;
-    // std::cout<<src<<" ";
-    a.pb(p[src]);
-    b.pb(q[src]);
-    for(int neighbour : graph[src]) {
-        if(not visited[neighbour]) {
-            dfsHelper(neighbour, visited, p, q);
+std::vector<std::list<int> > g;
+std::vector<bool> vis;
+void dfs(int src, ll &count) {
+    // std::cout<<src
+    vis[src] = true;
+    count++;
+    for(auto neighbour: g[src]) {
+        if(not vis[neighbour]) {
+            dfs(neighbour, count);
         }
     }
 }
+
+
+ll no_of_ways(ll n) {
+    ll total = ((n)*(n-1)) / 2;
+    vis.resize(n, false);
+    for(int i = 0; i < n; i++) {
+        if(not vis[i]) {
+            ll c = 0;
+            dfs(i, c);
+            total = total - ((c)*(c-1))/2;
+        }
+    }
+    return total;
+}
+
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    int t;
-    std::cin>>t;
-    while(t--) {
-        graph.clear();
-        int n, m;
-        std::cin>>n>>m;
-        std::vector<ll> p(n), q(n);
-        loop(i, 0, n-1) {
-            std::cin>>p[i];
-        }
-        loop(i, 0, n-1) {
-            std::cin>>q[i];
-        }
-        graph.resize(n);
-        while(m--) {
-            int u, v;
-            std::cin>>u>>v;
-            u--;v--;
-            addEdge(u, v);
-        }
-        std::vector<bool> visited(n, false);
-        bool flag = true;
-        loop(i, 0, n-1) {
-            if(not visited[i]) {
-                a.clear();
-                b.clear();
-                dfsHelper(i, visited, p, q);
-                std::sort(all(a));
-                std::sort(all(b));
-                // loop(j, 0, p.size() - 1) {
-                //     log(j, p.size(), p[j]);
-                // }
-                // loop(j, 0, q.size() - 1) {
-                //     log(j, q.size(), q[j]);
-                // }
-                // std:cout<<"-------\n";
-                if(a != b) {
-                    flag = false;
-                    break;
-                }
-            }
-        }
-        if(flag) {
-            std::cout<<"YES\n";
-        } else {
-            std::cout<<"NO\n";
-        }
+    int v;
+    std::cin>>v;
+    g.resize(v, std::list<int>());
+    int e;
+    std::cin>>e;
+    while(e--) {
+        int u, v;
+        std::cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
+    std::cout<<no_of_ways(v)<<"\n";
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();

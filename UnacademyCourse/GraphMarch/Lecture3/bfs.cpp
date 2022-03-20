@@ -1,4 +1,4 @@
-// Problem Link - https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/permutation-swaps/
+// Problem Link - 
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -53,78 +53,50 @@ void file_i_o()
         freopen("output.txt", "w", stdout);
     #endif
 }
-std::vector<std::vector<ll> > graph;
-std::vector<ll> a; // p
-std::vector<ll> b; // q
-void addEdge(int u, int v) {
-    graph[u].pb(v);
-    graph[v].pb(u);
-}
 
-void dfsHelper(int src, std::vector<bool> &visited, std::vector<ll> &p, std::vector<ll> &q) {
-    visited[src] = true;
-    // std::cout<<src<<" ";
-    a.pb(p[src]);
-    b.pb(q[src]);
-    for(int neighbour : graph[src]) {
-        if(not visited[neighbour]) {
-            dfsHelper(neighbour, visited, p, q);
+std::vector<std::list<int> > g;
+
+std::vector<int> bfs(int src, int v) { // O(V + E) and O(V)
+    std::queue<int> qu;
+    std::vector<bool> vis(v, false);
+    qu.push(src);
+    vis[src] = true;
+    std::vector<int> parent(v, -1);
+    std::vector<int> dist(v, 0);
+    parent[src] = src;
+    while(not qu.empty()) {
+        int curr = qu.front();
+        qu.pop();
+        // std::cout<<curr<<" ";
+        for(auto neighbour : g[curr]) {
+            if(not vis[neighbour]) {
+                vis[neighbour] = true;
+                parent[neighbour] = curr;
+                dist[neighbour] = dist[curr] + 1;
+                qu.push(neighbour);
+            }
         }
     }
+    return dist;
 }
+
 int main(int argc, char const *argv[]) {
     clock_t begin = clock();
     file_i_o();
     // Write your code here....
-    int t;
-    std::cin>>t;
-    while(t--) {
-        graph.clear();
-        int n, m;
-        std::cin>>n>>m;
-        std::vector<ll> p(n), q(n);
-        loop(i, 0, n-1) {
-            std::cin>>p[i];
-        }
-        loop(i, 0, n-1) {
-            std::cin>>q[i];
-        }
-        graph.resize(n);
-        while(m--) {
-            int u, v;
-            std::cin>>u>>v;
-            u--;v--;
-            addEdge(u, v);
-        }
-        std::vector<bool> visited(n, false);
-        bool flag = true;
-        loop(i, 0, n-1) {
-            if(not visited[i]) {
-                a.clear();
-                b.clear();
-                dfsHelper(i, visited, p, q);
-                std::sort(all(a));
-                std::sort(all(b));
-                // loop(j, 0, p.size() - 1) {
-                //     log(j, p.size(), p[j]);
-                // }
-                // loop(j, 0, q.size() - 1) {
-                //     log(j, q.size(), q[j]);
-                // }
-                // std:cout<<"-------\n";
-                if(a != b) {
-                    flag = false;
-                    break;
-                }
-            }
-        }
-        if(flag) {
-            std::cout<<"YES\n";
-        } else {
-            std::cout<<"NO\n";
-        }
+    int v;
+    std::cin>>v;
+    g.resize(v, std::list<int>());
+    int e;
+    std::cin>>e;
+    while(e--) {
+        int u, v;
+        std::cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
     }
-
+    std::vector<int> dist = bfs(0, v);
+    logarr(dist, 0, dist.size() - 1);
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
       std::cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
