@@ -55,9 +55,10 @@ vi getDigits(ll n) {
 	return v;
 }
 int main(int argc, char const *argv[]) {
-//	file_i_o();
-	ll n;
-	cin>>n;
+	clock_t begin = clock();
+	file_i_o();
+	ll n = 27;
+	// cin>>n;
 	vector<ll> dp(n+1, INT_MAX);
 	loop(i, 1, 9) dp[i] = 1;
 	loop(i, 10, n) {
@@ -69,6 +70,10 @@ int main(int argc, char const *argv[]) {
 		}
 	}
 	// logarr(dp, 0, n);
-	cout<<dp[n];
+	cout<<dp[n]<<"\n";
+	#ifndef ONLINE_JUDGE 
+	  clock_t end = clock();
+	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+	#endif 
 	return 0;
 }
