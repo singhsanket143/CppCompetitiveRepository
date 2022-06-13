@@ -1,4 +1,4 @@
-// Problem Link - 
+// Problem Link - https://atcoder.jp/contests/dp/tasks/dp_e
 /* By Sanket Singh */
 #include<bits/stdc++.h>
 //#include<ext/pb_ds/assoc_container.hpp>
@@ -9,7 +9,7 @@ using namespace std;
 #define ll 				long long int
 #define ld				long double
 #define mod             1000000007
-#define inf             1e18
+#define inf             1e9+1
 #define endl			"\n"
 #define pb 				push_back
 #define vi              vector<ll>
@@ -45,20 +45,59 @@ void err(istream_iterator<string> it, T a, Args... args) {
 
 void file_i_o()
 {
-	ios_base::sync_with_stdio(0); 
-	cin.tie(0); 
-	cout.tie(0);
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
 	#ifndef ONLINE_JUDGE
-		freopen("input.txt", "r", stdin);
-		freopen("output.txt", "w", stdout);
+	    freopen("input.txt", "r", stdin);
+	    freopen("output.txt", "w", stdout);
 	#endif
 }
+
 
 int main(int argc, char const *argv[]) {
 	clock_t begin = clock();
 	file_i_o();
 	// Write your code here....
+	ll n, w;
+	cin>>n>>w;
+	vector<int> val(n, 0);
+	vector<int> wt(n, 0);
+	loop(i, 0, n-1) {
+		cin>>wt[i]>>val[i];
+	}
+	int dp1[n*1000+1];
+	int dp2[n*1000+1];
+	loop(i, 0, n*1000) {
+		dp1[i] = inf;
+		dp2[i] = inf;
+	}
 
+	dp1[0] = 0;
+	dp1[val[0]] = wt[0];
+	loop(i, 1, n-1) {
+		loop(j, 0, n*1000) {
+			if(val[i] > j) {
+				dp2[j] = dp1[j];
+			} else {
+				dp2[j] = min({dp1[j], wt[i] + dp1[j-val[i]]});
+			}
+		}
+		loop(k, 0, n*1000) {
+			ll temp = dp1[k];
+			dp1[k] = dp2[k];
+			dp2[k] = temp;
+		}
+		loop(k, 0, n*1000) {
+			dp2[k] = inf;
+		}
+		
+	}
+	int result = 0;
+	loop(i, 0, n*1000) {
+		if(dp1[i] <= w) result = i;
+	}
+	cout<<result;
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();
 	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";

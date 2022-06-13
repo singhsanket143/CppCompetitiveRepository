@@ -37,31 +37,68 @@ vs tokenizer(string str,char ch) {std::istringstream var((str)); vs v; string t;
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
 void err(istream_iterator<string> it, T a, Args... args) {
-	cout << *it << " = " << a << endl;
-	err(++it, args...);
+    cout << *it << " = " << a << endl;
+    err(++it, args...);
 }
 //typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 //typedef trie<string,null_type,trie_string_access_traits<>,pat_trie_tag,trie_prefix_search_node_update> pbtrie;
 
 void file_i_o()
 {
-	ios_base::sync_with_stdio(0); 
-	cin.tie(0); 
-	cout.tie(0);
-	#ifndef ONLINE_JUDGE
-		freopen("input.txt", "r", stdin);
-		freopen("output.txt", "w", stdout);
-	#endif
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
 
-int main(int argc, char const *argv[]) {
-	clock_t begin = clock();
-	file_i_o();
-	// Write your code here....
+class Solution {
+public:
+    // vector<vector<int>> c; 
+    vector<vector<int>> dp; 
+    int minCostII(vector<vector<int>>& c) {
+        int k = c[0].size();
+        dp.resize(c.size(), vector<int> (k, 0));
+        // int ans = min({f(0, 0), f(0, 1), f(0, 2)});
+        // return ans;
+        // base case 
+        // dp[0][0] = c[0][0];
+        // dp[0][1] = c[0][1];
+        // dp[0][2] = c[0][2];
+        for(int j = 0; j < k; j++) {
+            dp[0][j] = c[0][j];
+        }
+        for(int i = 1; i < c.size(); i++) {
+            for(int j = 0; j < k; j++) {
+                dp[i][j] = INT_MAX;
+                for(int d = 0; d < k; d++) {
+                    if(d == j) {
+                        continue;
+                    }
+                    dp[i][j] = min(dp[i][j], dp[i-1][d]);
+                }
+                dp[i][j] += c[i][j];
+            }
+        }
+        int ans = INT_MAX;
+        
+        for(int i = 0; i < k; i++) {
+            ans = min(ans, dp[c.size() - 1][i]);
+        }
+        return ans;
+    }
+};
 
-	#ifndef ONLINE_JUDGE 
-	  clock_t end = clock();
-	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
-	#endif 
-	return 0;
+int main(int argc, char const *argv[]) {
+    clock_t begin = clock();
+    file_i_o();
+    // Write your code here....
+
+    #ifndef ONLINE_JUDGE 
+      clock_t end = clock();
+      cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+    #endif 
+    return 0;
 }

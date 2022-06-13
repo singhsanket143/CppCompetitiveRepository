@@ -37,31 +37,48 @@ vs tokenizer(string str,char ch) {std::istringstream var((str)); vs v; string t;
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
 void err(istream_iterator<string> it, T a, Args... args) {
-	cout << *it << " = " << a << endl;
-	err(++it, args...);
+    cout << *it << " = " << a << endl;
+    err(++it, args...);
 }
 //typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 //typedef trie<string,null_type,trie_string_access_traits<>,pat_trie_tag,trie_prefix_search_node_update> pbtrie;
 
 void file_i_o()
 {
-	ios_base::sync_with_stdio(0); 
-	cin.tie(0); 
-	cout.tie(0);
-	#ifndef ONLINE_JUDGE
-		freopen("input.txt", "r", stdin);
-		freopen("output.txt", "w", stdout);
-	#endif
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+}
+
+int lrs(std::string x, std::string y) {
+    int m = x.size();
+    int n = y.size();
+    int dp[m+1][n+1];
+    std::memset(dp, 0, sizeof dp);
+    for(int i = 1; i <= m; i++) {
+        for(int j = 1; j <= n; j++) {
+            if(x[i-1] == y[j-1] and i!=j) {
+                dp[i][j] = 1 + dp[i-1][j-1];
+            } else {
+                dp[i][j] = std::min(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    return dp[m][n];
 }
 
 int main(int argc, char const *argv[]) {
-	clock_t begin = clock();
-	file_i_o();
-	// Write your code here....
+    clock_t begin = clock();
+    file_i_o();
+    // Write your code here....
 
-	#ifndef ONLINE_JUDGE 
-	  clock_t end = clock();
-	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
-	#endif 
-	return 0;
+    #ifndef ONLINE_JUDGE 
+      clock_t end = clock();
+      cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+    #endif 
+    return 0;
 }

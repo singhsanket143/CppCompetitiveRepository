@@ -37,31 +37,66 @@ vs tokenizer(string str,char ch) {std::istringstream var((str)); vs v; string t;
 void err(istream_iterator<string> it) {}
 template<typename T, typename... Args>
 void err(istream_iterator<string> it, T a, Args... args) {
-	cout << *it << " = " << a << endl;
-	err(++it, args...);
+    cout << *it << " = " << a << endl;
+    err(++it, args...);
 }
 //typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> pbds;
 //typedef trie<string,null_type,trie_string_access_traits<>,pat_trie_tag,trie_prefix_search_node_update> pbtrie;
 
 void file_i_o()
 {
-	ios_base::sync_with_stdio(0); 
-	cin.tie(0); 
-	cout.tie(0);
-	#ifndef ONLINE_JUDGE
-		freopen("input.txt", "r", stdin);
-		freopen("output.txt", "w", stdout);
-	#endif
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
 }
 
-int main(int argc, char const *argv[]) {
-	clock_t begin = clock();
-	file_i_o();
-	// Write your code here....
+class Solution {
+public:
+    vector<vector<int>> c; 
+    vector<vector<int>> dp; 
+    int f(int i, int j) {
+        if(i == c.size() - 1) {
+            return dp[i][j] = c[i][j];
+        }
+        if(dp[i][j] != 0) return dp[i][j]; 
+        if(j == 0) 
+            return dp[i][j] = c[i][j] + min(f(i + 1, 1), f(i + 1, 2));
+        else if(j == 1) 
+            return dp[i][j] = c[i][j] + min(f(i + 1, 0), f(i + 1, 2));
+        else 
+            return dp[i][j] = c[i][j] + min(f(i + 1, 1), f(i + 1, 0));
+    }
+    
+    int minCost(vector<vector<int>>& costs) {
+        c = costs;
+        dp.resize(costs.size(), vector<int> (3, 0));
+        // int ans = min({f(0, 0), f(0, 1), f(0, 2)});
+        // return ans;
+        // base case 
+        dp[0][0] = c[0][0];
+        dp[0][1] = c[0][1];
+        dp[0][2] = c[0][2];
+        for(int i = 1; i < c.size(); i++) {
+            dp[i][0] = c[i][0] + min(dp[i-1][1], dp[i-1][2]);
+            dp[i][1] = c[i][1] + min(dp[i-1][0], dp[i-1][2]);
+            dp[i][2] = c[i][2] + min(dp[i-1][1], dp[i-1][0]);
+        }
+        return min({dp[c.size() - 1][0], dp[c.size() - 1][1], dp[c.size() - 1][2]});
+    }
+};
 
-	#ifndef ONLINE_JUDGE 
-	  clock_t end = clock();
-	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
-	#endif 
-	return 0;
+int main(int argc, char const *argv[]) {
+    clock_t begin = clock();
+    file_i_o();
+    // Write your code here....
+
+    #ifndef ONLINE_JUDGE 
+      clock_t end = clock();
+      cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+    #endif 
+    return 0;
 }
