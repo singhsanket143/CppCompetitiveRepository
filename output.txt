@@ -1,0 +1,9 @@
+abc
+acb
+bac
+bca
+cab
+cba
+
+
+Executed In: 0.144 ms
