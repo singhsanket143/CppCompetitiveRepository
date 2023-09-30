@@ -56,11 +56,9 @@ vector<double> sliding_median(vector<int> &arr, int n, int k) {
     result.push_back(m);
     unordered_map<int, int> mp;
     for(int i = k; i < n; i++) {
-        cout<<x<<" "<<y<<"\n";
         int newElementIndex = i;
         int oldElementToBeDeleted = i - k; 
         double med = getMedian(left, right, x, y);
-        cout<<med<<"\n";
         if(arr[newElementIndex] > med) {
             // go right
             right.push(arr[newElementIndex]);
@@ -76,7 +74,6 @@ vector<double> sliding_median(vector<int> &arr, int n, int k) {
             // go left
             left.push(arr[newElementIndex]);
             x++;
-            cout<<isBalanced(x, y)<<"\n";
             if(!isBalanced(x, y)) {
                 int toberemoved = left.top();
                 left.pop();
@@ -86,34 +83,35 @@ vector<double> sliding_median(vector<int> &arr, int n, int k) {
             }
         }
         mp[arr[oldElementToBeDeleted]] = oldElementToBeDeleted;
-        cout<<"old to be delete"<<arr[oldElementToBeDeleted]<<"\n";
-        cout<<"sizes"<<x<<" "<<y<<"\n";
+        if(arr[oldElementToBeDeleted] > getMedian(left, right, x, y)) {
+            y--;
+        } else {
+            x--;
+        }
         while(!left.empty() and mp.count(left.top())) {
             mp.erase(left.top());
             left.pop();
-            x--;
+            // x--;
             if(!isBalanced(x, y)) {
                 int toberemoved = right.top();
                 right.pop();
                 left.push(toberemoved);
                 y--; x++;
             }
-            cout<<"in left while"<<x<<y<<"\n";
 
         } 
         while(!right.empty() and mp.count(right.top())) { //mp[right.top] => 0
             mp.erase(right.top());
             right.pop();
-            y--;
+            // y--;
             if(!isBalanced(x, y)) {
                 int toberemoved = left.top();
                 left.pop();
                 right.push(toberemoved);
                 x--; y++;
             }
-            cout<<"in right while"<<x<<y<<" "<<left.top()<<" "<<right.top()<<"\n";
         } 
-        cout<<"median: "<<getMedian(left, right, x, y)<<"\n";
+        
         result.push_back(getMedian(left, right, x, y));
     }
     return result;
@@ -127,13 +125,20 @@ int main() {
     // Fast io
     // int t = 1;
     // cin>>t;
-    int n;
-    int k;
-    cin>>n>>k;
-    vector<int> arr(n);
-    for(int i = 0; i < n; i++) {
-        cin>>arr[i];
-    }
+    int n = 9;
+    int k = 3;
+    // cin>>n>>k;
+    vector<int> arr;
+    arr.push_back(1);
+    arr.push_back(2);
+    arr.push_back(3);
+    arr.push_back(4);
+    arr.push_back(2);
+    arr.push_back(3);
+    arr.push_back(1);
+    arr.push_back(4);
+    arr.push_back(2);
+
     vector<double> ans = sliding_median(arr, n, k);
     for(int i = 0; i < ans.size(); i++) {
         cout<<ans[i]<<"\n";
