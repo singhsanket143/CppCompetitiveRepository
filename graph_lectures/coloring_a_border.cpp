@@ -22,6 +22,8 @@ public:
         if(originalColor == color) return grid;
         dfs(grid, row, col, color, originalColor);
         for(auto p : internal) {
+            int i = p.first;
+            int j = p.second;
             grid[i][j] = originalColor;
         }
         for(int i = 0; i < grid.size(); i++) {
