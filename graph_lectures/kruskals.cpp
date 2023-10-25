@@ -29,8 +29,8 @@ bool cmp(Edge e1, Edge e2) {
     return e1.wt < e2.wt;
 }
 
-ll kruskals(vector<Edge> &input, int n, int e) {
-    sort(input.begin(), input.end(), cmp);
+ll kruskals(vector<Edge> &input, int n, int e) { // O(V + ElgE)
+    sort(input.begin(), input.end(), cmp); // ElgE
     vector<int> parent(n+1);
     vector<int> rank(n+1, 1);
     for(int i = 0; i <= n; i++) {
@@ -39,7 +39,7 @@ ll kruskals(vector<Edge> &input, int n, int e) {
     int edgeCount = 0; // n-1
     int i = 0;
     ll ans = 0;
-    while(edgeCount < n-1 and i < input.size()) {
+    while(edgeCount < n-1 and i < input.size()) { // V-1 -> O(Vlg*V)
         Edge curr = input[i]; // because input is sorted so we will get min wt edge
         int srcPar = find(parent, curr.src);
         int destpar = find(parent, curr.dest);

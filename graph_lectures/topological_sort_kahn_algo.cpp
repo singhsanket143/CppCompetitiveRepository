@@ -4,7 +4,7 @@ using namespace std;
 vector<list<int> > graph;
 int v; // no of vertices
 void add_edge(int a, int b, bool bidir = true) {
-    graph[a].push_back(b);
+    graph[a].push_back(b); // a->b
     if(bidir) {
         graph[b].push_back(a);
     }

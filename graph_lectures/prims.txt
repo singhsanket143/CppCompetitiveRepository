@@ -1,0 +1,9 @@
+- DS - Visited set, priority_queue<pair> , unordered_map
+
+- insert the pair of <-1, src> in the pq.
+- one by one remove the root element of the pq
+- if the root element is already visited, then we will just continue.
+- we mark the root visited
+- we store the wt of the pair in the ans
+- update the mapping
+- go to every neighbour of the curr element, and only add those which are non visited and have a better wt proposition.
