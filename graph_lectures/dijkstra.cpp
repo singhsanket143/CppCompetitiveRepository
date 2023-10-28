@@ -11,17 +11,17 @@ void add_edge(int u, int v, int wt, bool bidir=true) {
     }
 }
 
-unordered_map<int, int> djikstra(int src, int n) {
+unordered_map<int, int> djikstra(int src, int n) { // O(VlogV + ElogV)
     priority_queue<pp, vector<pp> , greater<pp> > pq; // {wt, node}
     unordered_set<int> vis;
     vector<int> via(n+1);
     unordered_map<int, int> mp;
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < n; i++) { // O(V)
         mp[i] = INT_MAX;
     }
     pq.push({0, src});
     mp[src] = 0;
-    while(!pq.empty()) {
+    while(!pq.empty()) { // O((V+E)logV)
         pp curr = pq.top();
         if(vis.count(curr.second)) {
             pq.pop();
